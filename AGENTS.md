@@ -18,9 +18,11 @@ AGENTS.md / CLAUDE.md   agent instructions (this file)
 docs/                   rationale, original brief, design notes
 sops/                   one folder per SOP: the SOP plus its appendices (SOP-nnn-Ann forms
                         and templates, revised with the SOP)
-tools/                  review-pack renderer, figure generator
+tools/                  review-pack renderer, figure generators, template sync
+copier.yml              questions asked when a product repo is created
+product-template/       Copier template for product repos (starter files and forms/ are
+                        generated from the SOP appendices by tools/sync_template.py)
 .github/                reusable CI                       (planned)
-product-template/       Copier template for product repos (planned)
 ```
 
 ## Related repos
@@ -53,6 +55,12 @@ minimalQMS hasn't been released yet, so it doesn't control its own changes yet.
 
 After `QMS-rev-A` is tagged, this repo follows its own SOP-001: every change needs an
 ECR issue, and every commit references it (`(ECR #n)`).
+
+## Changing a form
+
+After changing any SOP appendix, run `python tools/sync_template.py` so the product
+template's copies match. `python tools/sync_template.py --check` reports any copy that is out
+of date.
 
 ## Hard rules (apply in every minimalQMS repo)
 
