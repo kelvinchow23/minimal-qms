@@ -23,6 +23,22 @@ tools/                  review-pack renderer, figure generator
 product-template/       Copier template for product repos (planned)
 ```
 
+## Related repos
+
+The minimalQMS repos are cloned side by side in one parent folder. Agent sessions in
+different repos do not share memory; they coordinate through these files. Local folder
+names may differ from the GitHub names (e.g. this repo may be cloned as `mini-qms-ai`).
+
+| Repo | What to read there |
+|---|---|
+| `minimal-qms` (this repo) | `docs/INTERFACES.md`: the authority on shared names, IDs, columns and the product repo layout. `docs/ROADMAP.md`: what is planned. `sops/`: the procedures. |
+| `minimal-qms-ots-library` | OTS parts (`parts/CCC.csv`), project codes (`projects.csv`), part number allocation and purchasing tools (`tools/`). |
+| `minimal-qms-playbook` *(planned)* | Work instructions and agent skills (CAD, ECAD, assembly instructions, purchasing). |
+
+- Read the relevant file in the other repo before changing anything that crosses repos.
+- A change to a shared name or column updates `docs/INTERFACES.md` as part of the same
+  piece of work, through a separate PR in this repo.
+
 ## Current mode: bootstrap (before QMS-rev A)
 
 minimalQMS hasn't been released yet, so it doesn't control its own changes yet.
