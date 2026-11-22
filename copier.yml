@@ -1,0 +1,56 @@
+# Copier template for minimalQMS product repos.
+#   copier copy gh:kelvinchow23/minimal-qms <new-project-folder>
+#   copier update            (inside a product repo, to pick up a newer minimalQMS revision)
+# The template files are in product-template/. Starter files and forms/ are generated from
+# the SOP appendices by tools/sync_template.py; do not edit those copies by hand.
+
+_subdirectory: product-template
+_templates_suffix: .jinja
+_answers_file: .copier-answers.yml
+
+project_name:
+  type: str
+  help: Product name (e.g. Lab sensor node)
+  validator: "{% if not project_name.strip() %}Required{% endif %}"
+
+project_code:
+  type: str
+  help: 3-letter project code, capital letters (e.g. LSN). Registered in the OTS library when G0 is approved.
+  validator: >-
+    {% if not (project_code | length == 3 and project_code.isalpha() and project_code.isupper()) %}Must be 3 capital letters{% elif project_code[:2] in ['EC', 'HW', 'MC', 'CN'] %}Must not start with a part family prefix (EC, HW, MC, CN){% endif %}
+
+repo_name:
+  type: str
+  help: Repository name
+  default: "{{ project_name | lower | replace(' ', '-') }}"
+
+description:
+  type: str
+  help: One sentence on what the product is
+
+approver_name:
+  type: str
+  help: Your name (approver and quality lead to start with)
+
+approver_id:
+  type: str
+  help: Short id for records (e.g. initials)
+  default: "{{ approver_name.split() | map('first') | join('') | lower }}"
+
+mcad_tool:
+  type: str
+  help: Mechanical CAD tool
+  default: Fusion
+
+ecad_tool:
+  type: str
+  help: Electronics CAD tool
+  default: KiCad
+
+_message_after_copy: |
+  Project "{{ project_name }}" ({{ project_code }}) created at G0 (scope).
+
+  Next:
+    1. cd {{ _copier_conf.dst_path }} && git init && git add -A && git commit -m "[QMS] project created from minimalQMS template"
+    2. Open an agent session in the new folder and start G0. The agent reads AGENTS.md.
+    3. When G0 is approved, register {{ project_code }} in minimal-qms-ots-library/projects.csv.
