@@ -108,9 +108,17 @@ goes through the usual objections.
 | [**minimal-qms-ots-library**](https://github.com/kelvinchow23/minimal-qms-ots-library) | Off-the-shelf parts, purchasing tools and a [searchable catalogue](https://kelvinchow23.github.io/minimal-qms-ots-library/) |
 | minimal-qms-playbook *(planned)* | Work instructions and agent skills for things like CAD practice and assembly instructions |
 
-Each product gets its own repo, generated from the template here. It records which version
-of minimalQMS it was built under, and can pick up newer versions later as a reviewable
-change.
+Each product gets its own repo, generated from the template here with
+[Copier](https://copier.readthedocs.io/):
+
+```bash
+pip install copier
+copier copy gh:kelvinchow23/minimal-qms my-product
+```
+
+It asks for a project name, a 3-letter project code and your name, then creates the
+folders, forms and agent instructions. The new repo records which version of minimalQMS it
+was built under, and `copier update` picks up newer versions later as a reviewable change.
 
 ## Showcases
 
