@@ -25,7 +25,7 @@ parts, harnesses), assemblies, firmware and consumables. Also serial numbers of 
 
 | Type | Format | Kept in | Example |
 |---|---|---|---|
-| **OTS part** (off the shelf) | `CCC-NNNN` | OTS library (`minimal-qms-ots-library` repo) | `HWS-0001` M3x8 screws |
+| **OTS part** (off the shelf) | `CCC-NNNN` | OTS library (`minimal-qms-ots-library` repo) | `HWB-0001` M3x8 screws |
 | **Custom part** | `PPP-NNNN` | Product repo, `03_build_package/parts.csv` | `PRX-0004` printed lid |
 | **Custom assembly** | `PPP-A-NNNN` | Product repo, `03_build_package/parts.csv` | `PRX-A-0003` assembled PCB |
 
