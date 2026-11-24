@@ -56,8 +56,16 @@ A, B, C …, omitting I, O, Q, S, X and Z.
 
 A revision change follows SOP-001: everything that cites the part (`parts.csv`, BOMs,
 drawings) is updated in the same change.
-*Basis: ISO §8.3.6, §8.5.6, §7.5.3. The interchangeability rule and letter sequence are a
-minimalQMS choice based on common drafting practice.*
+
+Each released file, output folder and git tag must identify the PN and revision it belongs
+to. The default names are:
+- files and folders: `<PN>_rev<X>_<short-name>`, e.g. `PRX-0004_revB_lid.step`;
+- tags: `<PN>-rev<X>`, e.g. `PRX-0002-revB`.
+
+A team may use other names that meet the rule.
+*Basis: ISO §8.3.6, §8.5.6, §7.5.3, §8.5.2. The interchangeability rule and letter sequence are a
+minimalQMS choice based on common drafting practice. The default names are a minimalQMS
+choice.*
 
 ## 5. Lifecycle
 Each PN (OTS and custom) has one lifecycle state:
@@ -106,8 +114,8 @@ assembly. The BOM of the top assembly at a given revision defines it.
   duplicated. Variants that share little of their design are separate projects.
 - **Software** that ships in the product is a custom part. Its version tag is its revision,
   and it appears on the BOM. A software update to a released product follows SOP-001.
-- **Baselines:** each released configuration is tagged `<top assembly>-rev<X>` (e.g.
-  `PRX-A-0001-revB`). `main` holds the current approved state; branches are short-lived. A
+- **Baselines:** each released configuration is tagged with its top assembly's tag (section 4,
+  e.g. `PRX-A-0001-revB`). `main` holds the current approved state; branches are short-lived. A
   fix to an earlier baseline is made on a branch created from its tag.
 
 *Basis: ISO §8.3.5, §8.5.2, §8.5.6. ISO 10007 gives guidance on configuration management.

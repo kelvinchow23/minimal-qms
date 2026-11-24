@@ -46,7 +46,7 @@ deviations/DEV-nnn.md           SOP-001
 
 | ID | Meaning | Defined in | Example |
 |---|---|---|---|
-| `<top assembly>-rev<X>` | Baseline tag of a released configuration | SOP-002 | `PRX-A-0001-revB` |
+| `<PN>-rev<X>` | Tag of a released revision; on the top assembly it is the baseline of a released configuration | SOP-002 | `PRX-0002-revB`, `PRX-A-0001-revB` |
 | `CCC-NNNN` | OTS part (OTS library) | SOP-002 | `HWB-0001` |
 | `PPP-NNNN` + rev | Custom part (product repo) | SOP-002 | `PRX-0004` rev `B` |
 | `PPP-A-NNNN` + rev | Custom assembly (product repo) | SOP-002 | `PRX-A-0003` rev `A` |
@@ -66,6 +66,25 @@ deviations/DEV-nnn.md           SOP-001
 | `NC-nnn` | Nonconformance | SOP-008 | `NC-005` |
 
 IDs are never reused. Numbers are zero-padded so they sort correctly.
+
+## Release file names (SOP-002 section 4)
+
+SOP-002 requires only that each released file, output folder and tag identifies its PN and
+revision. These are the defaults; the playbook skills and tools use them. A team that
+changes them changes them here.
+
+| Item | Default | Example |
+|---|---|---|
+| File | `<PN>_rev<X>_<short-name>.<ext>` | `PRX-0004_revB_lid.step` |
+| Output folder (several files of one release) | `<PN>_rev<X>_<short-name>/` | `03_build_package/electronics/PRX-0002_revB_driver-pcb/` |
+| Git tag | `<PN>-rev<X>` | `PRX-0002-revB` |
+| Version name in the CAD tool | `<PN> rev <X>` | Fusion milestone `PRX-0004 rev B` |
+
+- `<PN>` and `<X>` are written exactly as in `parts.csv`, in capitals.
+- `<short-name>` is lower case, words joined by hyphens, with no spaces.
+- Folders and files that existed before these defaults keep their names.
+
+How to apply these names in each tool is in the playbook (`minimal-qms-playbook`).
 
 ## Gates (SOP-004)
 
