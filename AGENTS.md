@@ -35,7 +35,8 @@ names may differ from the GitHub names (e.g. this repo may be cloned as `mini-qm
 |---|---|
 | `minimal-qms` (this repo) | `docs/INTERFACES.md`: the authority on shared names, IDs, columns and the product repo layout. `docs/ROADMAP.md`: what is planned. `sops/`: the procedures. |
 | `minimal-qms-ots-library` | OTS parts (`parts/CCC.csv`), project codes (`projects.csv`), part number allocation and purchasing tools (`tools/`). |
-| `minimal-qms-playbook` *(planned)* | Work instructions and agent skills (CAD, ECAD, assembly instructions, purchasing). |
+| `minimal-qms-playbook` | Public work instructions and agent skills, `skills/<name>/SKILL.md` (Fusion, Onshape, KiCad, assembly instructions, purchasing). Read the relevant skill before doing that kind of work. |
+| `minimal-qms-playbook-private` | Private organization add-ons, `skills/<name>/<name>-private-addon.md`. Not every user has it. Never copy its contents into a public repo. |
 
 - Read the relevant file in the other repo before changing anything that crosses repos.
 - A change to a shared name or column updates `docs/INTERFACES.md` as part of the same

@@ -106,7 +106,7 @@ goes through the usual objections.
 |---|---|
 | **minimal-qms** (this repo) | The procedures, their forms and templates, checks, and the template for new projects |
 | [**minimal-qms-ots-library**](https://github.com/kelvinchow23/minimal-qms-ots-library) | Off-the-shelf parts, purchasing tools and a [searchable catalogue](https://kelvinchow23.github.io/minimal-qms-ots-library/) |
-| minimal-qms-playbook *(planned)* | Work instructions and agent skills for things like CAD practice and assembly instructions |
+| [**minimal-qms-playbook**](https://github.com/kelvinchow23/minimal-qms-playbook) | Work instructions and agent skills: Fusion, Onshape and KiCad practice, assembly instructions, purchasing. Organization-specific add-ons go in a private companion repo |
 
 Each product gets its own repo, generated from the template here with
 [Copier](https://copier.readthedocs.io/):
