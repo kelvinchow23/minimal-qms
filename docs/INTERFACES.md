@@ -108,6 +108,9 @@ How to apply these names in each tool is in the playbook (`minimal-qms-playbook`
 |---|---|---|
 | `class` | `A` / `B` / `C` | parts.csv, and checks in purchasing and builds |
 | `lifecycle` | `draft` / `released` / `obsolete` | parts.csv |
+| `unit_price` | price of **one piece**, with `currency` and `price_date` | OTS `parts/CCC.csv`, product parts.csv |
+| `pack_qty` | pieces per orderable pack, whole number ≥ 1 (`1` if sold singly); the pack price is `unit_price × pack_qty` | OTS `parts/CCC.csv` only; custom parts are one piece per item |
+| `qty` (purchases) | pieces, not packs: 2 packs of 100 is `200` | purchases.csv |
 | `result` | `pass` / `fail` / `na` | inspection.csv, test_results.csv |
 | `disposition` | `use-as-is` / `rework` / `scrap` / `return` | NC records |
 | `status` (supplier) | `approved` / `conditional` / `removed` | suppliers.csv |
