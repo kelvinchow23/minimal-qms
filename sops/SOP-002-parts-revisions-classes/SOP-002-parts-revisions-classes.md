@@ -38,7 +38,9 @@ parts, harnesses), assemblies, firmware and consumables. Also serial numbers of 
 - Allocate numbers with the OTS library's `new_pn.py`. A part number never changes meaning
   and is never reused.
 - OTS records hold where to buy: manufacturer, MPN, supplier, supplier part number, link,
-  and unit price with its date. Custom records hold revision, lifecycle, make method and
+  pack quantity, and the price of one piece with its date. Parts sold in packs are ordered
+  in whole packs. For McMaster-Carr parts, manufacturer and MPN stay blank (McMaster hides
+  them). Custom records hold revision, lifecycle, make method and
   source (CAD reference), plus the same purchasing columns when the part is bought from a
   fabricator.
 
