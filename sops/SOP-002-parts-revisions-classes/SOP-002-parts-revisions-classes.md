@@ -125,9 +125,13 @@ The variant, software and tag rules are a minimalQMS choice.*
 
 ## 9. Records
 - Product repo `03_build_package/parts.csv`: custom parts and assemblies.
-- Product repo `03_build_package/bom.csv`: master BOM, one block of lines per assembly (top level
-  and each sub-assembly), referring to OTS and custom PNs alike. Exported from the CAD tools
-  at release.
+- Product repo: one BOM per assembly, issued as appendix A01 of its build document
+  (`03_build_package/<PN>_rev<X>_A01_bom.csv`, source `02_design/build_document/bom.csv`),
+  read from the CAD tools. Columns: ref (the callout used in the assembly instruction), PN,
+  rev (custom parts), description, category (`Custom (part)`, `Custom (assembly)` or `OTS`),
+  qty, unit in capitals (`EA`), and for OTS parts the manufacturer, MPN, supplier, supplier SKU,
+  link and price, so the purchaser can order from it alone. Ordering data is copied into each
+  product; the OTS library is the source when a team keeps one.
 - OTS library: `parts/CCC.csv` (one file per prefix), `categories.csv` and `projects.csv`.
 
 These records are controlled under SOP-001. CI checks that every BOM line refers to an
@@ -140,4 +144,4 @@ and change only through a revision of this SOP.
 | ID | Title | File | Used in product repos as |
 |---|---|---|---|
 | SOP-002-A01 | Custom parts list | [SOP-002-A01-custom-parts.csv](SOP-002-A01-custom-parts.csv) | `03_build_package/parts.csv` |
-| SOP-002-A02 | Master BOM | [SOP-002-A02-bom.csv](SOP-002-A02-bom.csv) | `03_build_package/bom.csv` |
+| SOP-002-A02 | Assembly BOM | [SOP-002-A02-bom.csv](SOP-002-A02-bom.csv) | `02_design/build_document/bom.csv` (issued as appendix A01) |

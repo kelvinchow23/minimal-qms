@@ -29,7 +29,7 @@ before the next stage starts. Gates are the stage reviews ISO 9001 refers to.
 |---|---|---|---|
 | Scope | **G0** | Scope approved | `plan.yaml`: goal, scope, make/buy, roles, target dates |
 | Requirements | **G1** | Requirements reviewed | `requirements.yaml` with a verification method for each requirement, and `risks.csv` |
-| Design | **G2** | Design freeze | Design reviewed against requirements and risks; parts and BOM released (SOP-002); test procedures (SOP-007), assembly instructions and inspection checks (SOP-006) written |
+| Design | **G2** | Design freeze | Build document and all its appendices exported and reviewed against requirements and risks, including the make files and BOM; parts and BOM released (SOP-002) |
 | Build and verify | **G3** | Verified | Units built and tested; results show the requirements are met (SOP-006, SOP-007) |
 | Release and close-out | **G4** | Released | Units released (SOP-007); lessons learned recorded, including errors made by agents; scorecard compiled (section 8) |
 
@@ -91,16 +91,21 @@ have taken without agents. The scorecard is reviewed with the lessons learned at
 
 ## 9. Build package
 The build package (`03_build_package/`) holds the design outputs needed to buy, make,
-build and test the product:
-- `parts.csv` and `bom.csv` (SOP-002);
-- mechanical: STEP files and PDF drawings, and STL or 3MF files for printed parts, each
-  exported from the MCAD tool with the version it came from;
-- electronics: PCB fabrication and assembly files (e.g. Gerbers, PCB BOM, placement file),
-  exported from the ECAD tool;
-- software: released binaries or images, with their version;
-- assembly instructions and inspection checks (SOP-006), and test procedures (SOP-007).
+build and test the product, as one build document per in-house assembly (SOP-006 section 4),
+flat, with no subfolders:
+- the build document `<PN>_rev<X>.pdf`: the assembly instruction, carrying the assembly's PN
+  and revision;
+- its appendices as separate files: A01 BOM for ordering (SOP-002), A02 make files (STL or 3MF
+  for printed parts, PDF drawings where a dimension or finish matters, PCB fabrication and
+  assembly files such as Gerbers; each with the CAD version it came from), A03 inspection and
+  test (SOP-006, SOP-007), A04 build traveller (SOP-006), A05 software or firmware with its
+  version;
+- `parts.csv` (SOP-002).
 
-Design sources remain in `02_design/`. Large binary files are stored with Git LFS. The
+The make files are exported before the G2 review, so the approver reviews the actual outputs;
+approval freezes those versions, and the CAD versions are marked after approval. A Fusion or
+other native CAD file is not exported; its version is recorded in the A02 README and the
+review minutes. Design sources remain in `02_design/`. Large binary files are stored with Git LFS. The
 package is complete when the product can be bought, made, built and tested from it alone.
 It is approved at G2.
 *Basis: ISO §8.3.5, §8.5.1. The folder and its contents are a minimalQMS choice.*

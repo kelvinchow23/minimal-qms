@@ -18,14 +18,19 @@ worklog.md                      SOP-003  check-ins and notable working decisions
   risks.csv                     SOP-004  RISK-nnn (lightweight FMEA)
 02_design/
   reviews/DR-nnn/               SOP-003  package, minutes, transcript, visuals
-03_build_package/               SOP-004  everything needed to buy, make, build and test
-  parts.csv, bom.csv            SOP-002
-  mechanical/                   SOP-004  STEP, PDF drawings, STL/3MF (with MCAD version)
-  electronics/                  SOP-004  PCB fabrication and assembly files (with ECAD version)
-  software/                     SOP-004  released binaries or images
-  test_procedures/TP-nnn.md     SOP-007
-  assembly/PPP-A-NNNN.md        SOP-006  assembly instruction per in-house assembly
-  inspection_checks.csv         SOP-006  incoming checks for Class A parts
+  build_document/               SOP-006  sources of each build document: steps, pictures,
+                                         bom.csv, inspection_checks.csv, CAD/ECAD exports
+  test_procedures/TP-nnn.md     SOP-007  test procedure and analysis sources, test tools
+  software/                     SOP-004  software and firmware source
+03_build_package/               SOP-004  the build documents only, flat (no subfolders)
+  parts.csv                     SOP-002  custom part register (PN, rev, lifecycle)
+  <PN>_rev<X>.pdf               SOP-006  build document: the assembly instruction
+  <PN>_rev<X>_A01_bom.csv       SOP-002  appendix: BOM for ordering
+  <PN>_rev<X>_A02_make-files.zip SOP-004 appendix: STL/3MF, drawings, Gerbers (with CAD version)
+  <PN>_rev<X>_A03_inspection-test.pdf SOP-006/007 appendix: incoming, in-process and
+                                         final checks, test procedures, analyses
+  <PN>_rev<X>_A04_traveller.pdf SOP-006  appendix: build traveller, one per unit
+  <PN>_rev<X>_A05_software.zip  SOP-004  appendix: released software or firmware
 purchasing/
   purchases.csv                 SOP-005
   suppliers.csv                 SOP-005
@@ -77,6 +82,8 @@ changes them changes them here.
 |---|---|---|
 | File | `<PN>_rev<X>_<short-name>.<ext>` | `PRX-0004_revB_lid.step` |
 | Output folder (several files of one release) | `<PN>_rev<X>_<short-name>/` | `03_build_package/electronics/PRX-0002_revB_driver-pcb/` |
+| Build document | `<PN>_rev<X>.pdf` (the assembly instruction) | `PRX-A-0001_revB.pdf` |
+| Build document appendix | `<PN>_rev<X>_A<nn>_<short-name>.<ext>` (A01 BOM, A02 make files, A03 inspection and test, A04 traveller, A05 software; A06 on as needed) | `PRX-A-0001_revB_A02_make-files.zip` |
 | Git tag | `<PN>-rev<X>` | `PRX-0002-revB` |
 | Version name in the CAD tool | `<PN> rev <X>` | Fusion milestone `PRX-0004 rev B` |
 
