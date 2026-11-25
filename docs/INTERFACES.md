@@ -29,8 +29,10 @@ worklog.md                      SOP-003  check-ins and notable working decisions
   <PN>_rev<X>_A02_make-files.zip SOP-004 appendix: STL/3MF, drawings, Gerbers (with CAD version)
   <PN>_rev<X>_A03_inspection-test.pdf SOP-006/007 appendix: incoming, in-process and
                                          final checks, test procedures, analyses
-  <PN>_rev<X>_A04_traveller.pdf SOP-006  appendix: build traveller, one per unit
-  <PN>_rev<X>_A05_software.zip  SOP-004  appendix: released software or firmware (from G3)
+  <PN>_rev<X>_A04_build-traveller.pdf/.csv SOP-006 appendix: build traveller, one per unit
+  <PN>_rev<X>_A05_incoming-inspection-record.pdf/.csv SOP-006 appendix: incoming
+                                         inspection record, one per delivery
+  <PN>_rev<X>_A06_software.zip  SOP-004  appendix: released software or firmware (from G3)
 qms/
   forms/                        all     copies of every SOP appendix (replaced by copier update)
   qms-findings.csv              -       findings about minimalQMS itself, raised in this product
@@ -90,7 +92,7 @@ changes them changes them here.
 | File | `<PN>_rev<X>_<short-name>.<ext>` | `PRX-0004_revB_lid.step` |
 | Output folder (several files of one release) | `<PN>_rev<X>_<short-name>/` | `03_build_package/electronics/PRX-0002_revB_driver-pcb/` |
 | Build document | `<PN>_rev<X>.pdf` (the assembly instruction) | `PRX-A-0001_revB.pdf` |
-| Build document appendix | `<PN>_rev<X>_A<nn>_<short-name>.<ext>` (A01 BOM, A02 make files, A03 inspection and test, A04 traveller, A05 software; A06 on as needed) | `PRX-A-0001_revB_A02_make-files.zip` |
+| Build document appendix | `<PN>_rev<X>_A<nn>_<short-name>.<ext>` (A01 BOM, A02 make files, A03 inspection and test procedures, A04 build traveller, A05 incoming inspection record, A06 software; A07 on as needed). Each appendix's title says what it is, e.g. "A04 Build traveller (one per unit)". Forms to be filled (A04, A05) also come as CSV, for an agent or a spreadsheet; the filled copy is kept in `builds/B00n/` | `PRX-A-0001_revB_A02_make-files.zip` |
 | Git tag | `<PN>-rev<X>` | `PRX-0002-revB` |
 | Version name in the CAD tool | `<PN> rev <X>` | Fusion milestone `PRX-0004 rev B` |
 

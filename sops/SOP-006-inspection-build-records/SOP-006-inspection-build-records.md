@@ -25,7 +25,7 @@ contents. Testing and release are covered by SOP-007.
 
 | Class | On receipt |
 |---|---|
-| **A** | Inspect against the order (correct part and revision, quantity, no visible damage) and against the checks for the PN in appendix A03 of the build document (SOP-006-A05). Record the result in `inspection.csv`. |
+| **A** | Inspect against the order (correct part and revision, quantity, no visible damage) and against the checks for the PN in appendix A03 of the build document (SOP-006-A05). Record the result on the incoming inspection record (appendix A05), one per delivery, so all parts received together are checked and signed in one go; the filled record is kept in the build record. |
 | **B** | Visually confirm the item. No record beyond the received date in `purchases.csv`. |
 | **C** | No inspection. |
 
@@ -47,10 +47,13 @@ Three kinds of check are kept apart:
 - **In-process checks:** a check at the end of each assembly step, in the instruction.
 - **Final checks and tests:** after assembly; tests per SOP-007, issued in appendix A03.
 
-Each unit is built on a **build traveller** (appendix A04): its serial number (SOP-002
-section 7), the build, the assembler and the date, and a row per incoming check, step check,
-final check and test, each with pass, initials and date, ending with a build-complete
-signature. The completed traveller (or a photo of it) is kept in `builds/B00n/`. Release
+Each unit is built on a **build traveller** (appendix A04): its serial number (written in by
+the builder after the printed `<PN>-`), the build number (`B001` for the first build), the
+assembler and the date, and a row per step check, final check and test (with a one-line brief
+of the test), each with pass or fail, initials, date, comments and an NC number, ending with a
+build-complete signature. Incoming inspection is not on the traveller: it is per delivery, not
+per unit. If anything fails, the builder marks it, writes what they saw, stops work on that
+unit or part and tells the quality lead, who raises an NC (SOP-008). The completed traveller (or a photo of it) is kept in `builds/B00n/`. Release
 remains a separate decision (SOP-007).
 
 All of it is a design output, approved at G2 (SOP-004). The builder follows the instruction;

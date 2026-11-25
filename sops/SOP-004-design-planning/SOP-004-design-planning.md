@@ -98,15 +98,15 @@ flat, with no subfolders:
 - its appendices as separate files: A01 BOM for ordering (SOP-002), A02 make files (STL or 3MF
   for printed parts, PDF drawings where a dimension or finish matters, PCB fabrication and
   assembly files such as Gerbers; each with the CAD version it came from), A03 inspection and
-  test (SOP-006, SOP-007), A04 build traveller (SOP-006), A05 software or firmware with its
-  version, once released;
+  test procedures (SOP-006, SOP-007), A04 build traveller and A05 incoming inspection record
+  (SOP-006), A06 software or firmware with its version, once released;
 - `parts.csv` (SOP-002).
 
 The make files are exported before the G2 review, so the approver reviews the actual outputs;
 approval freezes those versions, and the CAD versions are marked after approval. G2 freezes
 the hardware: what must be bought and made. Software and firmware that only run on the
 finished unit stay a versioned draft in `02_design/software/` through G2 and are released
-(appendix A05) once they pass their tests, at G3 at the latest; a change before then is a
+(appendix A06) once they pass their tests, at G3 at the latest; a change before then is a
 version bump, not an assembly revision. A Fusion or
 other native CAD file is not exported; its version is recorded in the A02 README and the
 review minutes. Design sources remain in `02_design/`. Large binary files are stored with Git LFS. The
