@@ -145,7 +145,8 @@ The variant, software and tag rules are a minimalQMS choice.*
   supplier PN, link, price, and the unit and line cost in CAD, so the purchaser can order from it
   alone. Column names: `ref`, `internal_pn`, `rev`, `description`, `category`, `purchasing`,
   `qty`, `unit`, `manufacturer`, `manufacturer_pn`, `supplier`, `supplier_pn`, `link`,
-  `unit_price`, `pack_qty`, `currency`, `unit_cost_cad`, `line_cost_cad`, `price_date`, `notes`. Ordering data is copied into each
+  `unit_price`, `pack_qty`, `currency`, `unit_cost_cad`, `line_cost_cad`, `price_date`, `notes`. No
+  blank cells: `-` where a field does not apply. Ordering data is copied into each
   product; the OTS library is the source when a team keeps one.
 - OTS library: `parts/CCC.csv` (one file per prefix), `categories.csv` and `projects.csv`.
 
