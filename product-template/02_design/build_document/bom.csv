@@ -1,1 +1,1 @@
-ref,pn,rev,description,category,class,exact_part,qty,unit,manufacturer,mpn,supplier,supplier_pn,link,unit_price,pack_qty,currency,price_date,cad_source,notes
+ref,internal_pn,rev,description,category,class,exact_part,qty,unit,manufacturer,manufacturer_pn,supplier,supplier_pn,link,unit_price,pack_qty,currency,price_date,cad_source,notes
