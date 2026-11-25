@@ -93,7 +93,7 @@ have taken without agents. The scorecard is reviewed with the lessons learned at
 The build package (`03_build_package/`) holds the design outputs needed to buy, make,
 build and test the product, as one build document per in-house assembly (SOP-006 section 4),
 flat, with no subfolders:
-- the build document `<PN>_rev<X>_assembly_instructions.pdf`: the assembly instruction, carrying the assembly's PN
+- the build document `<PN>_assembly_instructions_rev_<X>.pdf`: the assembly instruction, carrying the assembly's PN
   and revision;
 - its appendices as separate files: A01 BOM for ordering (SOP-002), A02 make files (STL or 3MF
   for printed parts, PDF drawings where a dimension or finish matters, PCB fabrication and

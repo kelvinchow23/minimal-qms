@@ -61,7 +61,7 @@ drawings) is updated in the same change.
 
 Each released file, output folder and git tag must identify the PN and revision it belongs
 to. The default names are:
-- files and folders: `<PN>_rev<X>_<short-name>`, e.g. `PRX-0004_revB_lid.step`;
+- files and folders: `<PN>_rev<X>_<short-name>`, e.g. `PRX-0004_lid_rev_B.step`;
 - tags: `<PN>-rev<X>`, e.g. `PRX-0002-revB`.
 
 A team may use other names that meet the rule.
@@ -138,7 +138,7 @@ The variant, software and tag rules are a minimalQMS choice.*
 ## 9. Records
 - Product repo `03_build_package/parts.csv`: custom parts and assemblies.
 - Product repo: one BOM per assembly, issued as appendix A01 of its build document
-  (`03_build_package/<PN>_rev<X>_A01_bom.csv`, source `02_design/build_document/bom.csv`),
+  (`03_build_package/<PN>-A01_bom_rev_<X>.csv`, source `02_design/build_document/bom.csv`),
   read from the CAD tools. Columns: ref (the callout used in the assembly instruction), PN,
   rev (custom parts), description, category (`Custom (part)`, `Custom (assembly)` or `OTS`),
   qty, unit in capitals (`EA`), and for OTS parts the manufacturer, manufacturer PN, supplier,
