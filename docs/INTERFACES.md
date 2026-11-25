@@ -30,7 +30,7 @@ worklog.md                      SOP-003  check-ins and notable working decisions
   <PN>_rev<X>_A03_inspection-test.pdf SOP-006/007 appendix: incoming, in-process and
                                          final checks, test procedures, analyses
   <PN>_rev<X>_A04_traveller.pdf SOP-006  appendix: build traveller, one per unit
-  <PN>_rev<X>_A05_software.zip  SOP-004  appendix: released software or firmware
+  <PN>_rev<X>_A05_software.zip  SOP-004  appendix: released software or firmware (from G3)
 purchasing/
   purchases.csv                 SOP-005
   suppliers.csv                 SOP-005
