@@ -42,8 +42,8 @@ purchasing/
   requisitions/<order_ref>.csv  SOP-005  purchasing upload files as submitted
 builds/B00n/
   build.yaml                    SOP-006  build header and unit list
-  inspection.csv                SOP-006  incoming inspection of Class A lines
-  trace.csv                     SOP-006  which purchases went into which unit
+  A05 records                   SOP-006  filled incoming inspection records (critical parts only)
+  trace.csv                     SOP-006  optional: which purchases went into which unit
   test_results.csv              SOP-007
   release.yaml                  SOP-007  release decision per unit
 builds/unit_history.csv         SOP-006  changes to units after release

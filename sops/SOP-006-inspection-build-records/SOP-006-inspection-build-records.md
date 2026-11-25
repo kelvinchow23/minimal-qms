@@ -22,16 +22,16 @@ Every build of a product: receipt of parts, assembly of units and recording of t
 contents. Testing and release are covered by SOP-007.
 
 ## 3. Incoming inspection
+Only **critical parts** are inspected on receipt: custom parts made by someone else (PCBs,
+machined parts, outsourced prints), and parts whose failure would be unsafe or costly to find
+later. They are listed with their checks in `inspection_checks.csv` (SOP-006-A05, issued in
+appendix A03) and recorded on the incoming inspection record (appendix A05), one per delivery,
+so all parts received together are checked and signed in one go. Other parts, bought from an
+approved supplier (SOP-005), are not inspected: the build and the tests find their problems.
+If an assembly has no critical parts, it has no A05.
 
-| Class | On receipt |
-|---|---|
-| **A** | Inspect against the order (correct part and revision, quantity, no visible damage) and against the checks for the PN in appendix A03 of the build document (SOP-006-A05). Record the result on the incoming inspection record (appendix A05), one per delivery, so all parts received together are checked and signed in one go; the filled record is kept in the build record. |
-| **B** | Visually confirm the item. No record beyond the received date in `purchases.csv`. |
-| **C** | No inspection. |
-
-A purchased assembly receives its serial number at inspection (SOP-002 section 7).
-When a Class A item fails, mark it `fail`, segregate it from accepted stock, and raise an
-NC (SOP-008). Photos may be stored with the inspection record.
+A purchased assembly receives its serial number at receipt (SOP-002 section 7). When a part
+fails, mark it, keep it apart from accepted stock, and raise an NC (SOP-008).
 *Basis: ISO §8.4.2, §8.6. Classes are defined in SOP-002.*
 
 ## 4. Build document: assembly instruction, checks and traveller
@@ -72,14 +72,18 @@ Before assembly, record in `builds/B00n/build.yaml`:
 Use only `released` parts and revisions (SOP-002). Any other use requires a deviation.
 *Basis: ISO §8.5.1, §8.5.2*
 
-## 6. Trace record
-`trace.csv` has one row per unit per traced part: serial number, PN, revision, quantity,
-purchase line (`P-nnnn`), and the sub-assembly's own serial number where it has one. Class A parts are traced per unit. Class B parts are traced once
-per build (serial number `all`). Class C parts are not traced.
+## 6. Trace record (optional)
+By default a unit is traced to its design: its serial number, the build document revision,
+the build configuration in `build.yaml` and its build traveller. That is enough unless
+traceability to purchases is required (by a customer, a regulation or the team).
 
-An agent may prepare `trace.csv` from the build plan. The builder confirms or corrects it
-during or immediately after assembly. Corrections are never made later from memory.
-*Basis: ISO §8.5.2. Traceability by class is a minimalQMS choice.*
+When it is required, `trace.csv` adds one row per unit per traced part: serial number, PN,
+revision, quantity, purchase line(s) (`P-nnnn`; parts of one PN pooled from several purchases
+list every line in the bin), and the sub-assembly's own serial number where it has one.
+Parts of the same PN may be pooled from several purchases unless a batch itself matters (a lot
+or date code that may need recalling); stock is labelled with the PN and its purchase lines.
+*Basis: ISO 9001 §8.5.2 requires traceability only when it is a requirement; ISO 13485 makes it
+one for medical devices.*
 
 ## 7. Unit history
 After release, record every change to a unit in `builds/unit_history.csv` (SOP-006-A06):

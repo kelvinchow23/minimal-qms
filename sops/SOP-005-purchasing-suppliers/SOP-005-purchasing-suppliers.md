@@ -35,8 +35,11 @@ refers to them.
 | `established-supplier` | Widely used industrial supplier with published specifications (e.g. McMaster-Carr) |
 | `prior-good-results` | Used before without nonconformances |
 | `sole-source` | Only available source for the item |
-| `trial` | First order; status `conditional` until incoming inspection passes |
+| `trial` | First order; status `conditional` until the parts have been used without a nonconformance |
 
+- An approved supplier does not need ISO 9001 certification; the basis above is enough for
+  catalogue parts. A supplier of critical custom parts (SOP-006 section 3) is chosen on
+  `prior-good-results`, a certification, or a first order checked in full.
 - Add a supplier before its first order. A supplier added after the fact requires a
   deviation (SOP-001 section 9).
 - Review the supplier's status when the supplier causes a nonconformance (SOP-008).
