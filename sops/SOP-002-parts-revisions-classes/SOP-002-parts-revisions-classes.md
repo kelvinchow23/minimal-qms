@@ -83,13 +83,20 @@ State changes follow SOP-001.
 
 ## 6. Part classes
 
-The class says where a part may be bought. It is shown in the BOM (appendix A01) as a Source
-column, so the purchaser knows which parts may come from anywhere.
+The class says how a part may be bought. The BOM (appendix A01) shows it in a Purchasing
+column, so the purchaser knows which parts may come from anywhere:
 
-| Class | Items | Bought from (A01 Source) |
+| A01 Purchasing | Meaning |
+|---|---|
+| `Custom` | A custom part (PPP-NNNN), made to its design |
+| `Approved supplier, exact part` | Class A |
+| `Any supplier, exact part` | Class B or C, but the design depends on this exact part: a heat-set insert whose hole is drawn for it, a board the housing is built around. Marked per BOM line (`exact_part`) |
+| `Any supplier, any matching part` | Class B or C: any part that matches the BOM description |
+
+| Class | Items | Bought from |
 |---|---|---|
 | **A** | Parts where a wrong or fake part causes a real problem: safety (power supplies), measurement (sensors), certification (radio boards), and key components | An approved supplier (SOP-005) |
-| **B** | Low-risk parts that any matching part replaces: hardware (screws, inserts, standoffs), cables, memory cards, passive adapter boards | Any source, if it matches the BOM description |
+| **B** | Low-risk parts: hardware (screws, inserts, standoffs), cables, memory cards, passive adapter boards | Any supplier; the exact part where the design depends on it |
 | **C** | Consumables: glue, flux, solder, zip ties | Any source |
 
 Custom parts are made in house or by a chosen maker; the critical ones are inspected on receipt
