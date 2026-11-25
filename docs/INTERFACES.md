@@ -31,6 +31,9 @@ worklog.md                      SOP-003  check-ins and notable working decisions
                                          final checks, test procedures, analyses
   <PN>_rev<X>_A04_traveller.pdf SOP-006  appendix: build traveller, one per unit
   <PN>_rev<X>_A05_software.zip  SOP-004  appendix: released software or firmware (from G3)
+qms/
+  forms/                        all     copies of every SOP appendix (replaced by copier update)
+  qms-findings.csv              -       findings about minimalQMS itself, raised in this product
 purchasing/
   purchases.csv                 SOP-005
   suppliers.csv                 SOP-005
@@ -46,6 +49,10 @@ equipment/equipment.csv         SOP-007  test equipment and calibration due date
 nonconformance/NC-nnn.md        SOP-008
 deviations/DEV-nnn.md           SOP-001
 ```
+
+Folders and files below `03_build_package/` that have no record yet (`purchasing/`, `builds/`,
+`equipment/`, `nonconformance/`, `deviations/`) are not created in a new product repo; they are
+created, with these names, when their first record is made.
 
 ## IDs
 

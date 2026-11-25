@@ -5,9 +5,11 @@ Usage:
     python tools/sync_template.py --check  # exit 1 if any copy differs (for CI)
 
 Two kinds of copies are made into product-template/:
-  1. forms/ : a full copy of every appendix, so a product repo has every form it needs.
+  1. qms/forms/ : a full copy of every appendix, so a product repo has every form it needs.
   2. starter files: records a new project starts with. CSV starters get the appendix's
      header row only; other starters are full copies.
+Records with no starter (purchases, suppliers, unit history, equipment, NCs, deviations) are
+created from qms/forms/ when the first one is needed; their folders do not exist until then.
 Starters that need project answers (roles, plan, README, AGENTS.md) are hand-written
 .jinja files in product-template/ and are not managed here.
 """
@@ -28,11 +30,7 @@ STARTERS = {
     "SOP-004-A02-gates.yaml": "00_planning/gates.yaml",
     "SOP-004-A04-risks.csv": "01_requirements/risks.csv",
     "SOP-004-A05-scorecard.csv": "00_planning/scorecard.csv",
-    "SOP-005-A01-purchases.csv": "purchasing/purchases.csv",
-    "SOP-005-A02-suppliers.csv": "purchasing/suppliers.csv",
     "SOP-006-A05-inspection-checks.csv": "02_design/build_document/inspection_checks.csv",
-    "SOP-006-A06-unit-history.csv": "builds/unit_history.csv",
-    "SOP-007-A03-equipment.csv": "equipment/equipment.csv",
 }
 
 
@@ -51,7 +49,7 @@ def planned():
     out = {}
     for src in appendices():
         name = os.path.basename(src)
-        out[os.path.join("forms", name)] = open(src, encoding="utf-8").read()
+        out[os.path.join("qms", "forms", name)] = open(src, encoding="utf-8").read()
         if name in STARTERS:
             out[STARTERS[name]] = starter_content(src)
     missing = set(STARTERS) - {os.path.basename(p) for p in appendices()}
@@ -75,7 +73,7 @@ def main(argv):
             with open(dest, "w", encoding="utf-8", newline="\n") as f:
                 f.write(content)
     # forms that no longer exist as appendices
-    forms_dir = os.path.join(TEMPLATE, "forms")
+    forms_dir = os.path.join(TEMPLATE, "qms", "forms")
     expected = {os.path.basename(p) for p in appendices()}
     if os.path.isdir(forms_dir):
         for name in os.listdir(forms_dir):

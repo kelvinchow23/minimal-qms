@@ -1,7 +1,7 @@
 # Copier template for minimalQMS product repos.
 #   copier copy gh:kelvinchow23/minimal-qms <new-project-folder>
 #   copier update            (inside a product repo, to pick up a newer minimalQMS revision)
-# The template files are in product-template/. Starter files and forms/ are generated from
+# The template files are in product-template/. Starter files and qms/forms/ are generated from
 # the SOP appendices by tools/sync_template.py; do not edit those copies by hand.
 
 _subdirectory: product-template
