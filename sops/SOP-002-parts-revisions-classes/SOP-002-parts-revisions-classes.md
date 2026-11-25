@@ -83,13 +83,18 @@ State changes follow SOP-001.
 
 ## 6. Part classes
 
-| Class | Items | Traced to | Incoming inspection |
-|---|---|---|---|
-| **A** | Made parts and key components: PCBs, LEDs, driver ICs, printed or machined parts, harnesses | The specific purchase or print job, per unit | Yes, recorded |
-| **B** | Bulk hardware: screws, standoffs, heat-set inserts, wire, crimps | The bulk purchase | Visual check, not recorded |
-| **C** | Consumables: glue, flux, solder, zip ties | Not traced | None |
+The class says where a part may be bought. It is shown in the BOM (appendix A01) as a Source
+column, so the purchaser knows which parts may come from anywhere.
 
-The class is set per PN. When in doubt, assign the higher class.
+| Class | Items | Bought from (A01 Source) |
+|---|---|---|
+| **A** | Parts where a wrong or fake part causes a real problem: safety (power supplies), measurement (sensors), certification (radio boards), and key components | An approved supplier (SOP-005) |
+| **B** | Low-risk parts that any matching part replaces: hardware (screws, inserts, standoffs), cables, memory cards, passive adapter boards | Any source, if it matches the BOM description |
+| **C** | Consumables: glue, flux, solder, zip ties | Any source |
+
+Custom parts are made in house or by a chosen maker; the critical ones are inspected on receipt
+(SOP-006 section 3). Traceability to purchases is optional (SOP-006 section 6). The class is
+set per PN; when in doubt, assign A.
 *Basis: ISO §8.5.2 and §8.4.2 allow traceability and control to be set by risk. The A/B/C
 scheme is a minimalQMS choice.*
 
