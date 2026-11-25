@@ -24,7 +24,7 @@ worklog.md                      SOP-003  check-ins and notable working decisions
   software/                     SOP-004  software and firmware source
 03_build_package/               SOP-004  the build documents only, flat (no subfolders)
   parts.csv                     SOP-002  custom part register (PN, rev, lifecycle)
-  <PN>_rev<X>.pdf               SOP-006  build document: the assembly instruction
+  <PN>_rev<X>_assembly_instructions.pdf               SOP-006  build document: the assembly instruction
   <PN>_rev<X>_A01_bom.csv       SOP-002  appendix: BOM for ordering
   <PN>_rev<X>_A02_make_files.zip SOP-004 appendix: STL/3MF, drawings, Gerbers (with CAD version)
   <PN>_rev<X>_A03_test.pdf SOP-006/007 appendix: incoming, in-process and
@@ -91,7 +91,7 @@ changes them changes them here.
 |---|---|---|
 | File | `<PN>_rev<X>_<short-name>.<ext>` | `PRX-0004_revB_lid.step` |
 | Output folder (several files of one release) | `<PN>_rev<X>_<short-name>/` | `03_build_package/electronics/PRX-0002_revB_driver-pcb/` |
-| Build document | `<PN>_rev<X>.pdf` (the assembly instruction) | `PRX-A-0001_revB.pdf` |
+| Build document | `<PN>_rev<X>_assembly_instructions.pdf` (the assembly instruction) | `PRX-A-0001_revB_assembly_instructions.pdf` |
 | Build document appendix | `<PN>_rev<X>_A<nn>_<short-name>.<ext>` (A01 BOM, A02 make files, A03 inspection and test procedures, A04 build traveller, A05 incoming inspection record, A06 software; A07 on as needed). Each appendix's title says what it is, e.g. "A04 Build traveller (one per unit)". Forms to be filled (A04, A05) also come as CSV, for an agent or a spreadsheet; the filled copy is kept in `builds/B00n/` | `PRX-A-0001_revB_A02_make_files.zip` |
 | Git tag | `<PN>-rev<X>` | `PRX-0002-revB` |
 | Version name in the CAD tool | `<PN> rev <X>` | Fusion milestone `PRX-0004 rev B` |

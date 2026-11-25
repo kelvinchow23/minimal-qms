@@ -36,7 +36,7 @@ fails, mark it, keep it apart from accepted stock, and raise an NC (SOP-008).
 
 ## 4. Build document: assembly instruction, checks and traveller
 Each assembly (`PPP-A-NNNN`) built in-house has a build document: its assembly instruction
-(`03_build_package/<PN>_rev<X>.pdf`, SOP-006-A04), a controlled document with the same PN and
+(`03_build_package/<PN>_rev<X>_assembly_instructions.pdf`, SOP-006-A04), a controlled document with the same PN and
 revision as the assembly, and its appendices (SOP-004 section 9). It is written for the
 person doing the work: pictures first, short text. Its sources are kept in
 `02_design/build_document/` and the document is generated from them.
@@ -55,6 +55,12 @@ build-complete signature. Incoming inspection is not on the traveller: it is per
 per unit. If anything fails, the builder marks it, writes what they saw, stops work on that
 unit or part and tells the quality lead, who raises an NC (SOP-008). The completed traveller (or a photo of it) is kept in `builds/B00n/`. Release
 remains a separate decision (SOP-007).
+
+The appendices share the build document's revision and date. Any change to any appendix is a
+revision of the whole build document: its revision letter and date change on the instruction
+and every appendix together (SOP-001). Every title block carries the document number
+(`<PN>` for the instruction, `<PN>-A<nn>` for an appendix), revision, date, assembly name and
+number, status, approval and the design source (the top assembly's CAD milestone).
 
 All of it is a design output, approved at G2 (SOP-004). The builder follows the instruction;
 a step that cannot be followed as written is recorded on the traveller and an ECR is raised.
@@ -107,6 +113,6 @@ and change only through a revision of this SOP.
 | SOP-006-A01 | Build record header | [SOP-006-A01-build.yaml](SOP-006-A01-build.yaml) | `builds/B00n/build.yaml` |
 | SOP-006-A02 | Incoming inspection record | [SOP-006-A02-inspection.csv](SOP-006-A02-inspection.csv) | `builds/B00n/inspection.csv` |
 | SOP-006-A03 | Trace record | [SOP-006-A03-trace.csv](SOP-006-A03-trace.csv) | `builds/B00n/trace.csv` |
-| SOP-006-A04 | Assembly instruction | [SOP-006-A04-assembly-instruction.md](SOP-006-A04-assembly-instruction.md) | `03_build_package/<PN>_rev<X>.pdf` (generated from `02_design/build_document/`) |
+| SOP-006-A04 | Assembly instruction | [SOP-006-A04-assembly-instruction.md](SOP-006-A04-assembly-instruction.md) | `03_build_package/<PN>_rev<X>_assembly_instructions.pdf` (generated from `02_design/build_document/`) |
 | SOP-006-A05 | Incoming inspection checks | [SOP-006-A05-inspection-checks.csv](SOP-006-A05-inspection-checks.csv) | `02_design/build_document/inspection_checks.csv` (issued in appendix A03) |
 | SOP-006-A06 | Unit history | [SOP-006-A06-unit-history.csv](SOP-006-A06-unit-history.csv) | `builds/unit_history.csv` |
