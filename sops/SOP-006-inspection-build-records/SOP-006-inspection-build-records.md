@@ -48,8 +48,8 @@ Three kinds of check are kept apart:
 - **Final checks and tests:** after assembly; tests per SOP-007, issued in appendix A03.
 
 Each unit is built on a **build traveller** (appendix A04): its serial number (written in by
-the builder after the printed `<PN>-`), the build number (`B001` for the first build), the
-assembler and the date, and a row per step check, final check and test (with a one-line brief
+the builder after the printed `<PN>-`), the build number (`B001` for the first build), what it
+was built from (the git commit and CAD version), the assembler and the date, and a row per step check, final check and test (with a one-line brief
 of the test), each with pass or fail, initials, date, comments and an NC number, ending with a
 build-complete signature. Incoming inspection is not on the traveller: it is per delivery, not
 per unit. If anything fails, the builder marks it, writes what they saw, stops work on that
@@ -62,20 +62,23 @@ and every appendix together (SOP-001). Every title block carries the document nu
 (`<PN>` for the instruction, `<PN>-A<nn>` for an appendix), revision, date, assembly name and
 number, status, approval and the design source (the top assembly's CAD milestone).
 
-All of it is a design output, approved at G2 (SOP-004). The builder follows the instruction;
-a step that cannot be followed as written is recorded on the traveller and an ECR is raised.
+All of it is a design output, approved for build at G2 and released at G3 (SOP-004). The
+builder follows the instruction; a step that cannot be followed as written is recorded on the
+traveller, and the design is fixed: by pull request before release, by ECR after (SOP-001).
 *Basis: ISO §8.3.5 (design outputs specify production and inspection), §8.5.1 (documented
 information for production)*
 
 ## 5. Opening a build
 Before assembly, record in `builds/B00n/build.yaml`:
 - build ID, actual start date and builder;
-- assembly PN and revision, and the QMS revision in use;
+- assembly PN and revision, its state (approved for build, or released), the git commit
+  and CAD version it was built from, and the QMS revision in use;
 - configuration: the revision of every made part and the firmware version;
 - serial numbers to be built (SOP-002 section 7);
 - applicable deviations.
 
-Use only `released` parts and revisions (SOP-002). Any other use requires a deviation.
+Build only from a build document approved for build or released (SOP-002 section 5). Any
+other use requires a deviation.
 *Basis: ISO §8.5.1, §8.5.2*
 
 ## 6. Trace record (optional)

@@ -66,6 +66,10 @@ used.
 7. **Release.** A human tags product and QMS releases.
 
 Update everything that cites a changed item in the same change.
+
+A design approved for build but not yet released (SOP-002 section 5) changes without an
+ECR: a pull request approved by the approver, with the reason in the PR. Requirements
+changes after G1, and every change after release, follow steps 1 to 7.
 *Basis: ISO §8.3.6, §8.5.6. The ECR/ECO terms, git workflow and merge rule are a
 minimalQMS choice.*
 

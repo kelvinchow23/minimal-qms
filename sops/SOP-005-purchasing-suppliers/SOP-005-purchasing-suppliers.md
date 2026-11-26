@@ -53,9 +53,9 @@ Record each item ordered as one line in `purchases.csv`:
 - order date; on receipt, received date, quantity and supplier lot or job number;
 - inspection result for Class A lines (SOP-006).
 
-Order for a released build document (merged and tagged, SOP-002 section 5). Prototype parts for design
-work are the exception; mark them `proto` in `notes`. Prototype parts must not be used in
-a released build.
+Order for a build document approved for build at G2, or released (SOP-002 section 5).
+Parts for design work before G2 are the exception; mark them `proto` in `notes`; they must
+not be used in a build.
 *Basis: ISO §8.4.3, §8.5.2. Referring to external records instead of copying them is a
 minimalQMS choice.*
 
