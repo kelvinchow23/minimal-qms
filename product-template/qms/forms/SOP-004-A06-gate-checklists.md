@@ -34,7 +34,7 @@ For a later iteration, answer each question for what the iteration changes.
 
 ## G2 Design freeze
 
-**Records:** design review minutes, `parts.csv`, and the build document with its appendices
+**Records:** design review minutes and the build document with its appendices
 (A01 BOM, A02 make files including PCB files, A03 inspection and test, A04 traveller), all
 exported before the review. Software that only runs on the finished unit is not frozen at G2.
 

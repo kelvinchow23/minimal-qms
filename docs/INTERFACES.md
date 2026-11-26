@@ -23,7 +23,6 @@ worklog.md                      SOP-003  check-ins and notable working decisions
   test_procedures/TP-nnn.md     SOP-007  test procedure and analysis sources, test tools
   software/                     SOP-004  software and firmware source
 03_build_package/               SOP-004  the build documents only, flat (no subfolders)
-  parts.csv                     SOP-002  custom part register (PN, rev, lifecycle)
   <PN>_assembly_instructions_rev_<X>.pdf               SOP-006  build document: the assembly instruction
   <PN>-A01_bom_rev_<X>.csv       SOP-002  appendix: BOM for ordering
   <PN>-A02_make_files_rev_<X>.zip SOP-004 appendix: STL/3MF, drawings, Gerbers (with CAD version)
@@ -96,7 +95,7 @@ changes them changes them here.
 | Git tag | `<PN>-rev<X>` | `PRX-0002-revB` |
 | Version name in the CAD tool | `<PN> rev <X>` | Fusion milestone `PRX-0004 rev B` |
 
-- `<PN>` and `<X>` are written exactly as in `parts.csv`, in capitals.
+- `<PN>` and `<X>` are written exactly as in the BOM, in capitals.
 - `<short-name>` is lower case, words joined by hyphens, with no spaces.
 - Folders and files that existed before these defaults keep their names.
 
@@ -122,9 +121,9 @@ How to apply these names in each tool is in the playbook (`minimal-qms-playbook`
 
 | Column | Values | Used in |
 |---|---|---|
-| `class` | `A` / `B` / `C` | parts.csv, and checks in purchasing and builds |
-| `lifecycle` | `draft` / `released` / `obsolete` | parts.csv |
-| `unit_price` | price of **one piece**, with `currency` and `price_date` | OTS `parts/CCC.csv`, product parts.csv |
+| `class` | `A` / `B` / `C` | OTS library and BOM sources; sets the A01 Purchasing column |
+| `lifecycle` | `draft` / `released` / `obsolete` | OTS library only; custom parts take their state from git (SOP-002 section 5) |
+| `unit_price` | price of **one piece**, with `currency` and `price_date` | OTS `parts/CCC.csv`, BOM sources |
 | `pack_qty` | pieces per orderable pack, whole number ≥ 1 (`1` if sold singly); the pack price is `unit_price × pack_qty` | OTS `parts/CCC.csv` only; custom parts are one piece per item |
 | `qty` (purchases) | pieces, not packs: 2 packs of 100 is `200` | purchases.csv |
 | `result` | `pass` / `fail` / `na` | inspection.csv, test_results.csv |
@@ -139,7 +138,7 @@ How to apply these names in each tool is in the playbook (`minimal-qms-playbook`
 ```
 SOP-004 plan, requirements, risks ──► SOP-003 reviews check designs against them
 SOP-003 review approval ───────────► SOP-004 gate passed
-SOP-002 parts.csv (class) ─────────► SOP-005 what to buy · SOP-006 what to inspect and trace
+SOP-002 BOM (class) ──────────────► SOP-005 what to buy · SOP-006 what to inspect
 SOP-005 purchases.csv (P-nnnn) ────► SOP-006 inspection and trace.csv
 SOP-006 inspection fail ───────────► SOP-008 NC record
 SOP-006 built units (serials) ─────► SOP-007 tests and release

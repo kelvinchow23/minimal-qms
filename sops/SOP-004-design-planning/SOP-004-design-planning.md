@@ -100,7 +100,6 @@ flat, with no subfolders:
   assembly files such as Gerbers; each with the CAD version it came from), A03 inspection and
   test procedures (SOP-006, SOP-007), A04 build traveller and A05 incoming inspection record
   (SOP-006), A06 software or firmware with its version, once released;
-- `parts.csv` (SOP-002).
 
 The make files are exported before the G2 review, so the approver reviews the actual outputs;
 approval freezes those versions, and the CAD versions are marked after approval. G2 freezes

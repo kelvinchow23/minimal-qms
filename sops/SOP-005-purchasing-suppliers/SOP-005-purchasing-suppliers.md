@@ -53,7 +53,7 @@ Record each item ordered as one line in `purchases.csv`:
 - order date; on receipt, received date, quantity and supplier lot or job number;
 - inspection result for Class A lines (SOP-006).
 
-Order only PNs that are `released` in `parts.csv` (SOP-002). Prototype parts for design
+Order for a released build document (merged and tagged, SOP-002 section 5). Prototype parts for design
 work are the exception; mark them `proto` in `notes`. Prototype parts must not be used in
 a released build.
 *Basis: ISO §8.4.3, §8.5.2. Referring to external records instead of copying them is a

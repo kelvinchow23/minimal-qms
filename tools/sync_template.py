@@ -24,7 +24,6 @@ TEMPLATE = os.path.join(ROOT, "product-template")
 STARTERS = {
     "SOP-001-A01-ecr-form.md": ".github/ISSUE_TEMPLATE/ecr.md",
     "SOP-001-A02-eco-pr-template.md": ".github/pull_request_template.md",
-    "SOP-002-A01-custom-parts.csv": "03_build_package/parts.csv",
     "SOP-002-A02-bom.csv": "02_design/build_document/bom.csv",
     "SOP-003-A03-worklog.md": "worklog.md",
     "SOP-004-A02-gates.yaml": "00_planning/gates.yaml",
