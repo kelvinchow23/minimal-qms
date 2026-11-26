@@ -42,8 +42,10 @@ A gate that does not apply may be skipped, with the reason stated in `plan.yaml`
 Each product chooses how much the human signs off and how much the agent does and records,
 like an agent tool's permission modes. The gates are always G0 to G4; the level sets which
 gates are passed together in one approval. Gates passed together share one date and one
-approval reference in `plan.yaml`. The level is set in `plan.yaml` (`involvement`) and may
-change between gates through a PR: it applies to the gates not yet passed. The design controls ISO 9001 §8.3 requires (inputs, reviews,
+approval reference in `plan.yaml`. The level is set per iteration in `plan.yaml`
+(`involvement`), so each iteration can use a different one: for example an agent-driven first
+prototype, then a human-driven iteration of the version others will build. Within an
+iteration it may change between gates through a PR, for the gates not yet passed. The design controls ISO 9001 §8.3 requires (inputs, reviews,
 verification, validation, controlled changes, records) are met at every level, scaled to the
 product.
 
