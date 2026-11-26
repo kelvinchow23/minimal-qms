@@ -22,7 +22,7 @@ Every product repo, from the start of a project or iteration to close-out. Day-t
 scheduling is outside this procedure; any tool may be used.
 
 ## 3. Stages and gates
-Development runs in up to five stages; how many depends on the involvement level (section 3a). Each stage ends at a gate, where the work is approved
+Development runs in five stages, the same for every product; the involvement level (section 3a) sets how many gates are passed in one approval. Each stage ends at a gate, where the work is approved
 before the next stage starts. Gates are the stage reviews ISO 9001 refers to.
 
 | Stage | Gate | Name | Required to pass |
@@ -40,26 +40,27 @@ A gate that does not apply may be skipped, with the reason stated in `plan.yaml`
 
 ## 3a. Involvement levels
 Each product chooses how much the human signs off and how much the agent does and records,
-like an agent tool's permission modes. The level is set at the start in `plan.yaml`
-(`involvement`) and may be raised later through a PR; it is never lowered for a design
-already past a gate. The design controls ISO 9001 §8.3 requires (inputs, reviews,
+like an agent tool's permission modes. The gates are always G0 to G4; the level sets which
+gates are passed together in one approval. Gates passed together share one date and one
+approval reference in `plan.yaml`. The level is set in `plan.yaml` (`involvement`) and may
+change between gates through a PR: it applies to the gates not yet passed. The design controls ISO 9001 §8.3 requires (inputs, reviews,
 verification, validation, controlled changes, records) are met at every level, scaled to the
 product.
 
 | | **Agent-driven** | **Balanced** | **Human-driven** |
 |---|---|---|---|
-| Gates | One: **G2**, the build package approved before ordering | **G1** scope and requirements (G0 and G1 merged), **G2** design freeze, **G3** verified and released (G3 and G4 merged) | G0 to G4 (section 3) |
+| Gates passed together | **G0 + G1 + G2** in one approval of the build package, before anything is ordered; **G3 + G4** closed with one recorded line once the first unit works in its intended use | **G0 + G1**, then **G2**, then **G3 + G4** | Each gate on its own (section 3) |
 | Requirements | 3 to 6 essential functions in `requirements.yaml`, each with how it is checked | Requirements and a short `risks.csv` | Full requirements, `risks.csv`, independent review |
 | Design history | `worklog.md`: decisions and their reasons, written with the human as the work happens | `worklog.md` and one review record per gate (package and minutes in one file) | Review package and minutes per gate (SOP-003) |
 | Build document | Instructions, A01 BOM, A02 make files, A04 traveller | The same, plus test procedures in A03 | The same, plus incoming inspection (A05) and traceability where required |
 | Verification | Essential functional checks only, listed in A03 | A test for each requirement (SOP-007) | Test procedures, results and release records (SOP-007) |
-| Validation | One recorded line after the first unit runs in its intended use | Covered by G3 | Covered by G3 and G4 |
+| Validation | The G3 + G4 line: the first unit works in its intended use | At G3 + G4 | At G3 and G4 |
 | Changes after a gate | A PR: new revision and a worklog line | ECR as a PR (SOP-001) | ECR and ECO, deviations, NCs (SOP-001, SOP-008) |
 
 At every level the agent writes only what was discussed with the human or is in the CAD and
 other sources; what was not decided is marked "not decided", never filled in. Approvals are
-always the human's own words (SOP-001 section 7). The gates each level uses, and their
-records, are in `gates.yaml`.
+always the human's own words (SOP-001 section 7). `gates.yaml` lists each gate's records
+and, per level, the gates passed together and the lighter records each level needs.
 *Basis: ISO §8.3.2 (stages and controls set by the nature, duration and complexity of the
 work), §8.3.4, §7.5.1 (documented information to the extent necessary). The three levels are
 a minimalQMS choice.*

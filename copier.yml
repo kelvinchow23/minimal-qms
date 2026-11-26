@@ -39,7 +39,7 @@ approver_id:
 
 involvement:
   type: str
-  help: "How much you sign off (SOP-004 section 3a): agent-driven = one approval of the build package; balanced = three gates; human-driven = all five gates"
+  help: "How many gates you pass per approval (SOP-004 section 3a): agent-driven = G0-G2 together, then G3-G4; balanced = G0+G1, G2, G3+G4; human-driven = one at a time. Can change between gates."
   choices:
     - agent-driven
     - balanced
