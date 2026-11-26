@@ -97,6 +97,8 @@ changes them changes them here.
 
 - `<PN>` and `<X>` are written exactly as in the BOM, in capitals.
 - `<short-name>` is lower case, words joined by hyphens, with no spaces.
+- Released files add the release date after the revision, `_rev_<X>_<YYMMDD>`, e.g.
+  `PRX-A-0001-A01_bom_rev_B_261126.csv`; drafts have no date.
 - Folders and files that existed before these defaults keep their names.
 
 How to apply these names in each tool is in the playbook (`minimal-qms-playbook`).
