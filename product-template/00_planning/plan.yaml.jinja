@@ -1,4 +1,5 @@
 # Development plan (SOP-004 section 4). Change through a PR; old values stay in git history.
+involvement: {{ involvement }}   # agent-driven, balanced or human-driven: how many gates per approval; set per iteration (SOP-004 section 3a)
 product: null              # top assembly part number, allocated in the design stage
 iteration: 1
 qms_rev: "{{ _commit }}"   # the minimalQMS revision this project runs under
@@ -8,7 +9,7 @@ scope:
   out: []
 make_buy: []               # e.g. {item: enclosure, decision: make, note: "printed in-house"}
 roles: roles.yaml
-gates:
+gates:                     # gates passed together share one actual date and approval
   - {gate: G0, target: null, actual: null, approval: null}
   - {gate: G1, target: null, actual: null, approval: null}
   - {gate: G2, target: null, actual: null, approval: null}
