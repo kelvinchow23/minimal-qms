@@ -59,8 +59,9 @@ Determine the cause of each failure:
 
 ## 6. Release
 Units are released at G4. A unit may be released when all tests for its configuration have passed, or failures are
-covered by an NC dispositioned `use-as-is`; its trace record is complete (SOP-006); and no
-deviation prevents release. The agent prepares `release.yaml` with this evidence. The
+covered by an NC dispositioned `use-as-is`; its trace record is complete where one is kept
+(SOP-006); it matches the released revision of its design, or its differences are recorded
+in `release.yaml` and dispositioned; and no deviation prevents release. The agent prepares `release.yaml` with this evidence. The
 release approver approves it (SOP-001 section 7) and merges it. CI checks the evidence
 before merge.
 *Basis: ISO §8.6*

@@ -63,6 +63,13 @@ A, B, C …, omitting I, O, Q, S, X and Z.
 A revision change follows SOP-001: everything that cites the part (BOMs, build documents,
 drawings) is updated in the same change.
 
+A revision letter is given when the design is approved for build at G2, and becomes official
+when that revision is released at G3 (section 5). Fixes found while building and testing the
+first units keep the letter: rev A is what finally works, not the first attempt. The CAD tool's
+own version numbers (e.g. Fusion `v31`) are not revisions: they count saves, change when
+nothing a builder makes changes, and cover one file. The build document records the CAD
+version each revision points to.
+
 Each released file, output folder and git tag must identify the PN and revision it belongs
 to. The default names are:
 - files and folders: `<PN>_<short-name>_rev_<X>`, e.g. `PRX-0004_lid_rev_B.step`;
@@ -79,12 +86,14 @@ Custom parts and assemblies take their state from git, through their build docum
 | State | Where it is |
 |---|---|
 | Draft | On a branch or in an open pull request; title blocks say "Draft". |
-| Released | Merged to `main` after approval and tagged `<PN>-rev<X>`, with a GitHub Release carrying the build document and its appendices; title blocks say "Released" with the date. |
+| Approved for build | Merged to `main` after the G2 approval, not tagged; title blocks say "Approved for build" with the approval reference. Parts may be ordered and prototype units built from it. Each build records the git commit and CAD version it was built from (SOP-006 section 5). A fix found in a prototype build is a pull request approved by the approver, with the reason in the PR and on the traveller of the build that found it; it keeps the revision letter and needs no ECR. |
+| Released | Tagged `<PN>-rev<X>` at G3, once units built from it pass verification (SOP-007), with a GitHub Release carrying the build document and its appendices; title blocks say "Released" with the date, and file names add it (`docs/INTERFACES.md`). From here a change is an ECR and a new revision (SOP-001). |
 | Obsolete | Superseded by a later revision or no longer in any current BOM; earlier revisions stay in their tags and releases. |
 
 OTS parts keep a `lifecycle` column in the OTS library (`draft`, `released`, `obsolete`).
 State changes follow SOP-001.
-*Basis: ISO §8.5.2, §7.5.3. Using git as the record of state is a minimalQMS choice.*
+*Basis: ISO §8.5.2, §7.5.3, §8.3.4 (verification before release). Using git as the record of
+state, and releasing after the first units are verified, are minimalQMS choices.*
 
 ## 6. Part classes
 

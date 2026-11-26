@@ -87,7 +87,7 @@ of date.
 9. **Work on the current gate only.** Know which gate the project is at (`plan.yaml`).
    Exploring, researching and discussing later work is fine; acting on it is not. Do not
    register a project before G0, choose parts or allocate part numbers before the design
-   stage (after G1), release parts before G2, or order anything before parts are released. Record ideas for later
+   stage (after G1), order anything before the G2 approval, or release (tag) a design before it passes G3. Record ideas for later
    gates in `worklog.md` and bring them up when that gate's work starts. Gates may be
    passed quickly, even several in one session, but always in order, each with its record
    and approval. During each stage, ask the human the questions in that gate's checklist

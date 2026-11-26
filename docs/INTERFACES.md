@@ -115,7 +115,8 @@ changes them changes them here.
 - `<PN>` and `<X>` are written exactly as in the BOM, in capitals.
 - `<short-name>` is lower case, words joined by hyphens, with no spaces.
 - Released files add the release date after the revision, `_rev_<X>_<YYMMDD>`, e.g.
-  `PRX-A-0001-A01_bom_rev_B_261126.csv`; drafts have no date.
+  `PRX-A-0001-A01_bom_rev_B_261126.csv`; drafts and designs approved for build have no date.
+- Title block status: `Draft`, `Approved for build` or `Released` (SOP-002 section 5).
 - Folders and files that existed before these defaults keep their names.
 
 How to apply these names in each tool is in the playbook (`minimal-qms-playbook`).
@@ -126,8 +127,8 @@ How to apply these names in each tool is in the playbook (`minimal-qms-playbook`
 |---|---|---|
 | G0 | Scope approved | Approval of the plan |
 | G1 | Requirements reviewed | Formal review (SOP-003) |
-| G2 | Design freeze | Formal review; parts, BOM and test procedures released (SOP-002, SOP-007) |
-| G3 | Verified | Formal review of build and test results (SOP-006, SOP-007) |
+| G2 | Design freeze | Formal review; build document approved for build (SOP-002 section 5) |
+| G3 | Verified | Formal review of build and test results; build document released, tagged (SOP-002, SOP-006, SOP-007) |
 | G4 | Released | Formal review: units released, lessons learned (SOP-007) |
 
 ## Scorecard activities (SOP-004 section 8)

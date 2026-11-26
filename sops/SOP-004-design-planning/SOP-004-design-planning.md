@@ -29,8 +29,8 @@ before the next stage starts. Gates are the stage reviews ISO 9001 refers to.
 |---|---|---|---|
 | Scope | **G0** | Scope approved | `plan.yaml`: goal, scope, make/buy, roles, target dates |
 | Requirements | **G1** | Requirements reviewed | `requirements.yaml` with a verification method for each requirement, and `risks.csv` |
-| Design | **G2** | Design freeze | Build document and all its appendices exported and reviewed against requirements and risks, including the make files and BOM; parts and BOM released (SOP-002) |
-| Build and verify | **G3** | Verified | Units built and tested; results show the requirements are met (SOP-006, SOP-007) |
+| Design | **G2** | Design freeze | Build document and all its appendices exported and reviewed against requirements and risks, including the make files and BOM; approved for build (SOP-002 section 5): parts may be ordered and first units built |
+| Build and verify | **G3** | Verified | Units built from the approved design and tested; results show the requirements are met (SOP-006, SOP-007); fixes found on the way are in the build document, and its revision is released (tagged, SOP-002 section 5) |
 | Release and close-out | **G4** | Released | Units released (SOP-007); lessons learned recorded, including errors made by agents; scorecard compiled (section 8) |
 
 `gates.yaml` lists the records each gate requires. CI blocks a gate with missing records.
@@ -131,7 +131,10 @@ flat, with no subfolders:
   (SOP-006), A06 software or firmware with its version, once released;
 
 The make files are exported before the G2 review, so the approver reviews the actual outputs;
-approval freezes those versions, and the CAD versions are marked after approval. G2 freezes
+approval freezes those versions for the first builds, and the CAD versions are marked after
+approval. A fix found while building is made in the build document and its make files and
+re-exported (SOP-002 section 5); the revision is released at G3 with the versions that
+passed. G2 freezes
 the hardware: what must be bought and made. Software and firmware that only run on the
 finished unit stay a versioned draft in `02_design/software/` through G2 and are released
 (appendix A06) once they pass their tests, at G3 at the latest; a change before then is a
@@ -140,7 +143,7 @@ format (e.g. Fusion `.f3d` for each custom part) and the top assembly as STEP, s
 survives losing access to the CAD tool's cloud; the CAD versions are recorded in the A02
 README and the review minutes. Design sources remain in `02_design/`. Large binary files are stored with Git LFS. The
 package is complete when the product can be bought, made, built and tested from it alone.
-It is approved at G2.
+It is approved for build at G2 and released at G3.
 *Basis: ISO §8.3.5, §8.5.1. The folder and its contents are a minimalQMS choice.*
 
 ## Appendices
