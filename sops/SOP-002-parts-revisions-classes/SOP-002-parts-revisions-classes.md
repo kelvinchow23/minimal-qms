@@ -41,9 +41,10 @@ The format is a team choice. The minimalQMS default (`CCC-NNNN`, `PPP-NNNN`, `PP
 allocated with the OTS library's `new_pn.py`) is in `docs/INTERFACES.md`, "Part numbers";
 the tools and agents use it. A team that uses another format records it there and adapts
 the tools.
-- OTS records hold where to buy: manufacturer, MPN, supplier, supplier part number, link,
-  pack quantity, and the price of one piece with its date. Parts sold in packs are ordered
-  in whole packs. For McMaster-Carr parts, manufacturer and MPN stay blank (McMaster hides
+- OTS records hold where to buy: manufacturer, manufacturer PN, supplier, supplier part
+  number, link, pack quantity, and the price of one piece with its date, one value per
+  column, in the same columns as the BOM (docs/INTERFACES.md). Parts sold in packs are ordered
+  in whole packs. For McMaster-Carr parts, manufacturer and manufacturer PN stay blank (McMaster hides
   them). A custom part's revision is in the BOM that uses it, and its CAD source in the
   build document's title block and make-files README; when a fabricator makes it, the BOM
   line carries the same purchasing columns.
