@@ -44,7 +44,7 @@ involvement:
     - agent-driven
     - balanced
     - human-driven
-  default: agent-driven
+  # no default: the person creating the project chooses
 
 mcad_tool:
   type: str
