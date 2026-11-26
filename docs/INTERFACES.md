@@ -145,6 +145,8 @@ How to apply these names in each tool is in the playbook (`minimal-qms-playbook`
 | `lifecycle` | `draft` / `released` / `obsolete` | OTS library only; custom parts take their state from git (SOP-002 section 5) |
 | `unit_price` | price of **one piece**, with `currency` and `price_date` | OTS `parts/CCC.csv`, BOM sources |
 | `pack_qty` | pieces per orderable pack, whole number ≥ 1 (`1` if sold singly); the pack price is `unit_price × pack_qty` | OTS `parts/CCC.csv` only; custom parts are one piece per item |
+| purchasing columns | `manufacturer, manufacturer_pn, supplier, supplier_pn, link, unit_price, pack_qty, currency, price_date`: same names and order in both places, one value per cell (no `mpn`) | OTS `parts/CCC.csv`, BOM `bom.csv` |
+| `description` | one line, what the part is first, then key specs; fasteners `Type, size, [style, ]material` (e.g. `Screw, M3 x 6 mm, button head hex drive, 18-8 stainless`) | OTS `parts/CCC.csv`, BOM |
 | `qty` (purchases) | pieces, not packs: 2 packs of 100 is `200` | purchases.csv |
 | `result` | `pass` / `fail` / `na` | inspection.csv, test_results.csv |
 | `disposition` | `use-as-is` / `rework` / `scrap` / `return` | NC records |
