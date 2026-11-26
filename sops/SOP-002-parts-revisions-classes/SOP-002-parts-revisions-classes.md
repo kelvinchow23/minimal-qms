@@ -22,21 +22,25 @@ Everything that appears on a BOM: purchased parts, made parts (PCBs, printed or 
 parts, harnesses), assemblies, firmware and consumables. Also serial numbers of built units.
 
 ## 3. Part numbers
-
-| Type | Format | Kept in | Example |
-|---|---|---|---|
-| **OTS part** (off the shelf) | `CCC-NNNN` | OTS library (`minimal-qms-ots-library` repo) | `HWB-0001` M3x8 screws |
-| **Custom part** | `PPP-NNNN` | Product repo, in the BOM of the assembly that uses it | `PRX-0004` printed lid |
-| **Custom assembly** | `PPP-A-NNNN` | Product repo, as the number of its build document | `PRX-A-0003` assembled PCB |
-
-- `CCC` is an OTS category code; `PPP` is the project code. Both are 3 capital letters,
-  registered in the OTS library, and never the same. `A` is a fixed letter that marks an
-  assembly.
+Every item on a BOM has a part number (PN). The rules, whatever the format:
+- A PN identifies one item: it never changes meaning and is never reused.
+- An assembly's PN shows that it is an assembly, and a custom item's PN shows that it is
+  custom rather than bought, so a BOM line says by itself whether it needs its own build
+  document (SOP-006) or a supplier.
+- Custom PNs are scoped to the project; bought (OTS) PNs are shared across projects.
 - An assembly has sub-parts or requires an assembly or modification instruction. A PCB
   ordered already assembled is an assembly.
-- Custom parts and assemblies share one number sequence per project.
-- Allocate numbers with the OTS library's `new_pn.py`. A part number never changes meaning
-  and is never reused.
+
+| Type | Kept in |
+|---|---|
+| **OTS part** (off the shelf) | OTS library (`minimal-qms-ots-library` repo), or the product's BOM if the team keeps no library |
+| **Custom part** | Product repo, in the BOM of the assembly that uses it |
+| **Custom assembly** | Product repo, as the number of its build document |
+
+The format is a team choice. The minimalQMS default (`CCC-NNNN`, `PPP-NNNN`, `PPP-A-NNNN`,
+allocated with the OTS library's `new_pn.py`) is in `docs/INTERFACES.md`, "Part numbers";
+the tools and agents use it. A team that uses another format records it there and adapts
+the tools.
 - OTS records hold where to buy: manufacturer, MPN, supplier, supplier part number, link,
   pack quantity, and the price of one piece with its date. Parts sold in packs are ordered
   in whole packs. For McMaster-Carr parts, manufacturer and MPN stay blank (McMaster hides

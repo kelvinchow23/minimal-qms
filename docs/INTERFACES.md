@@ -55,14 +55,31 @@ Folders and files below `03_build_package/` that have no record yet (`purchasing
 `equipment/`, `nonconformance/`, `deviations/`) are not created in a new product repo; they are
 created, with these names, when their first record is made.
 
+## Part numbers (default; SOP-002 section 3)
+
+SOP-002 sets the rules a part number must meet; this is the default format. A team that
+changes it changes it here, and adapts the tools that read part numbers (the OTS library's
+`new_pn.py` and `check.py`, the build-document generator, the CAD BOM checks).
+
+| Type | Default format | Example |
+|---|---|---|
+| OTS part | `CCC-NNNN`: `CCC` = category code from the OTS library's `categories.csv` | `HWB-0001` M3x8 screws |
+| Custom part | `PPP-NNNN`: `PPP` = project code from the OTS library's `projects.csv` | `PRX-0004` printed lid |
+| Custom assembly | `PPP-A-NNNN`: the fixed `-A-` marks an assembly | `PRX-A-0003` assembled PCB |
+
+- `CCC` and `PPP` are 3 capital letters and never the same.
+- Custom parts and custom assemblies have **separate** number sequences per project: the first
+  part is `PPP-0001` and the first assembly `PPP-A-0001`.
+- Allocate numbers with `new_pn.py`.
+- Any BOM line whose PN contains `-A-` is an assembly, with its own build document and BOM;
+  the product's structure is found by following those lines (SOP-002).
+
 ## IDs
 
 | ID | Meaning | Defined in | Example |
 |---|---|---|---|
 | `<PN>-rev<X>` | Tag of a released revision; on the top assembly it is the baseline of a released configuration | SOP-002 | `PRX-0002-revB`, `PRX-A-0001-revB` |
-| `CCC-NNNN` | OTS part (OTS library) | SOP-002 | `HWB-0001` |
-| `PPP-NNNN` + rev | Custom part (product repo) | SOP-002 | `PRX-0004` rev `B` |
-| `PPP-A-NNNN` + rev | Custom assembly (product repo) | SOP-002 | `PRX-A-0003` rev `A` |
+| Part numbers | OTS part, custom part, custom assembly | SOP-002; default format above | `HWB-0001`, `PRX-0004` rev `B`, `PRX-A-0003` rev `A` |
 | `<PN>-YYMMDD<letter>` | Serial number (assemblies only) | SOP-002 | `PRX-A-0003-261118A` |
 | ECR `#n` | Change request (an issue) | SOP-001 | `ECR #12` |
 | `SOP-nnn-Ann` | SOP appendix (form or template) | SOP-001 | `SOP-003-A01` review package |
