@@ -18,22 +18,31 @@ worklog.md                      SOP-003  check-ins and notable working decisions
   risks.csv                     SOP-004  RISK-nnn (lightweight FMEA)
 02_design/
   reviews/DR-nnn/               SOP-003  package, minutes, transcript, visuals
-03_build_package/               SOP-004  everything needed to buy, make, build and test
-  parts.csv, bom.csv            SOP-002
-  mechanical/                   SOP-004  STEP, PDF drawings, STL/3MF (with MCAD version)
-  electronics/                  SOP-004  PCB fabrication and assembly files (with ECAD version)
-  software/                     SOP-004  released binaries or images
-  test_procedures/TP-nnn.md     SOP-007
-  assembly/PPP-A-NNNN.md        SOP-006  assembly instruction per in-house assembly
-  inspection_checks.csv         SOP-006  incoming checks for Class A parts
+  build_document/               SOP-006  sources of each build document: steps, pictures,
+                                         bom.csv, inspection_checks.csv, CAD/ECAD exports
+  test_procedures/TP-nnn.md     SOP-007  test procedure and analysis sources, test tools
+  software/                     SOP-004  software and firmware source
+03_build_package/               SOP-004  the build documents only, flat (no subfolders)
+  <PN>_assembly_instructions_rev_<X>.pdf               SOP-006  build document: the assembly instruction
+  <PN>-A01_bom_rev_<X>.csv       SOP-002  appendix: BOM for ordering
+  <PN>-A02_make_files_rev_<X>.zip SOP-004 appendix: STL/3MF, drawings, Gerbers (with CAD version)
+  <PN>-A03_test_rev_<X>.pdf SOP-006/007 appendix: incoming, in-process and
+                                         final checks, test procedures, analyses
+  <PN>-A04_traveller_rev_<X>.pdf/.csv SOP-006 appendix: build traveller, one per unit
+  <PN>-A05_incoming_rev_<X>.pdf/.csv SOP-006 appendix: incoming
+                                         inspection record, one per delivery
+  <PN>-A06_software_rev_<X>.zip  SOP-004  appendix: released software or firmware (from G3)
+qms/
+  forms/                        all     copies of every SOP appendix (replaced by copier update)
+  qms-findings.csv              -       findings about minimalQMS itself, raised in this product
 purchasing/
   purchases.csv                 SOP-005
   suppliers.csv                 SOP-005
   requisitions/<order_ref>.csv  SOP-005  purchasing upload files as submitted
 builds/B00n/
   build.yaml                    SOP-006  build header and unit list
-  inspection.csv                SOP-006  incoming inspection of Class A lines
-  trace.csv                     SOP-006  which purchases went into which unit
+  A05 records                   SOP-006  filled incoming inspection records (critical parts only)
+  trace.csv                     SOP-006  optional: which purchases went into which unit
   test_results.csv              SOP-007
   release.yaml                  SOP-007  release decision per unit
 builds/unit_history.csv         SOP-006  changes to units after release
@@ -42,14 +51,35 @@ nonconformance/NC-nnn.md        SOP-008
 deviations/DEV-nnn.md           SOP-001
 ```
 
+Folders and files below `03_build_package/` that have no record yet (`purchasing/`, `builds/`,
+`equipment/`, `nonconformance/`, `deviations/`) are not created in a new product repo; they are
+created, with these names, when their first record is made.
+
+## Part numbers (default; SOP-002 section 3)
+
+SOP-002 sets the rules a part number must meet; this is the default format. A team that
+changes it changes it here, and adapts the tools that read part numbers (the OTS library's
+`new_pn.py` and `check.py`, the build-document generator, the CAD BOM checks).
+
+| Type | Default format | Example |
+|---|---|---|
+| OTS part | `CCC-NNNN`: `CCC` = category code from the OTS library's `categories.csv` | `HWB-0001` M3x8 screws |
+| Custom part | `PPP-NNNN`: `PPP` = project code from the OTS library's `projects.csv` | `PRX-0004` printed lid |
+| Custom assembly | `PPP-A-NNNN`: the fixed `-A-` marks an assembly | `PRX-A-0003` assembled PCB |
+
+- `CCC` and `PPP` are 3 capital letters and never the same.
+- Custom parts and custom assemblies have **separate** number sequences per project: the first
+  part is `PPP-0001` and the first assembly `PPP-A-0001`.
+- Allocate numbers with `new_pn.py`.
+- Any BOM line whose PN contains `-A-` is an assembly, with its own build document and BOM;
+  the product's structure is found by following those lines (SOP-002).
+
 ## IDs
 
 | ID | Meaning | Defined in | Example |
 |---|---|---|---|
 | `<PN>-rev<X>` | Tag of a released revision; on the top assembly it is the baseline of a released configuration | SOP-002 | `PRX-0002-revB`, `PRX-A-0001-revB` |
-| `CCC-NNNN` | OTS part (OTS library) | SOP-002 | `HWB-0001` |
-| `PPP-NNNN` + rev | Custom part (product repo) | SOP-002 | `PRX-0004` rev `B` |
-| `PPP-A-NNNN` + rev | Custom assembly (product repo) | SOP-002 | `PRX-A-0003` rev `A` |
+| Part numbers | OTS part, custom part, custom assembly | SOP-002; default format above | `HWB-0001`, `PRX-0004` rev `B`, `PRX-A-0003` rev `A` |
 | `<PN>-YYMMDD<letter>` | Serial number (assemblies only) | SOP-002 | `PRX-A-0003-261118A` |
 | ECR `#n` | Change request (an issue) | SOP-001 | `ECR #12` |
 | `SOP-nnn-Ann` | SOP appendix (form or template) | SOP-001 | `SOP-003-A01` review package |
@@ -75,13 +105,17 @@ changes them changes them here.
 
 | Item | Default | Example |
 |---|---|---|
-| File | `<PN>_rev<X>_<short-name>.<ext>` | `PRX-0004_revB_lid.step` |
+| File | `<PN>_<short-name>_rev_<X>.<ext>` | `PRX-0004_lid_rev_B.step` |
 | Output folder (several files of one release) | `<PN>_rev<X>_<short-name>/` | `03_build_package/electronics/PRX-0002_revB_driver-pcb/` |
+| Build document | `<PN>_assembly_instructions_rev_<X>.pdf` (the assembly instruction) | `PRX-A-0001_assembly_instructions_rev_B.pdf` |
+| Build document appendix | `<PN>-A<nn>_<short-name>_rev_<X>.<ext>` (A01 BOM, A02 make files, A03 inspection and test procedures, A04 build traveller, A05 incoming inspection record, A06 software; A07 on as needed). Each appendix's title says what it is, e.g. "A04 Build traveller (one per unit)". Forms to be filled (A04, A05) also come as CSV, for an agent or a spreadsheet; the filled copy is kept in `builds/B00n/` | `PRX-A-0001-A02_make_files_rev_B.zip` |
 | Git tag | `<PN>-rev<X>` | `PRX-0002-revB` |
 | Version name in the CAD tool | `<PN> rev <X>` | Fusion milestone `PRX-0004 rev B` |
 
-- `<PN>` and `<X>` are written exactly as in `parts.csv`, in capitals.
+- `<PN>` and `<X>` are written exactly as in the BOM, in capitals.
 - `<short-name>` is lower case, words joined by hyphens, with no spaces.
+- Released files add the release date after the revision, `_rev_<X>_<YYMMDD>`, e.g.
+  `PRX-A-0001-A01_bom_rev_B_261126.csv`; drafts have no date.
 - Folders and files that existed before these defaults keep their names.
 
 How to apply these names in each tool is in the playbook (`minimal-qms-playbook`).
@@ -106,9 +140,9 @@ How to apply these names in each tool is in the playbook (`minimal-qms-playbook`
 
 | Column | Values | Used in |
 |---|---|---|
-| `class` | `A` / `B` / `C` | parts.csv, and checks in purchasing and builds |
-| `lifecycle` | `draft` / `released` / `obsolete` | parts.csv |
-| `unit_price` | price of **one piece**, with `currency` and `price_date` | OTS `parts/CCC.csv`, product parts.csv |
+| `class` | `A` / `B` / `C` | OTS library and BOM sources; sets the A01 Purchasing column |
+| `lifecycle` | `draft` / `released` / `obsolete` | OTS library only; custom parts take their state from git (SOP-002 section 5) |
+| `unit_price` | price of **one piece**, with `currency` and `price_date` | OTS `parts/CCC.csv`, BOM sources |
 | `pack_qty` | pieces per orderable pack, whole number ≥ 1 (`1` if sold singly); the pack price is `unit_price × pack_qty` | OTS `parts/CCC.csv` only; custom parts are one piece per item |
 | `qty` (purchases) | pieces, not packs: 2 packs of 100 is `200` | purchases.csv |
 | `result` | `pass` / `fail` / `na` | inspection.csv, test_results.csv |
@@ -123,7 +157,7 @@ How to apply these names in each tool is in the playbook (`minimal-qms-playbook`
 ```
 SOP-004 plan, requirements, risks ──► SOP-003 reviews check designs against them
 SOP-003 review approval ───────────► SOP-004 gate passed
-SOP-002 parts.csv (class) ─────────► SOP-005 what to buy · SOP-006 what to inspect and trace
+SOP-002 BOM (class) ──────────────► SOP-005 what to buy · SOP-006 what to inspect
 SOP-005 purchases.csv (P-nnnn) ────► SOP-006 inspection and trace.csv
 SOP-006 inspection fail ───────────► SOP-008 NC record
 SOP-006 built units (serials) ─────► SOP-007 tests and release

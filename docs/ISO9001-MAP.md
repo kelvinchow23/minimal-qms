@@ -46,7 +46,7 @@ requires SOPs. That's why each SOP is about one page.
 | 7.1.5 | Measuring equipment fit for purpose, and calibration | `equipment/equipment.csv`, plus a CI check for overdue equipment | SOP-007 |
 | 7.2 | Competence | `qms/training.csv` (person, skill, evidence) | Management layer |
 | 8.2.3 | Review of customer or product requirements | `requirements.yaml`, approved at G1 | SOP-004 |
-| 8.3.2–8.3.6 | Design planning, inputs, reviews, outputs, changes | `plan.yaml`, requirements, review minutes and transcripts, released design exports, ECR/ECO | SOP-003, SOP-004 |
+| 8.3.2–8.3.6 | Design planning, inputs, reviews, outputs, changes | `plan.yaml` (with the involvement level), requirements, review records, the build document, changes by PR (ECR/ECO at the higher levels) | SOP-003, SOP-004 (section 3a: the controls are scaled by involvement level, not dropped) |
 | 8.4.1 | Supplier evaluation and monitoring | `suppliers.csv` | SOP-005 |
 | 8.5.2 | Unique identification where traceability is needed | Serial numbers, `trace.csv`, purchase lines (Class A/B) | SOP-002, SOP-006 |
 | 8.5.3 | Customer or supplier property lost or damaged | An NC record if it happens | SOP-008 |

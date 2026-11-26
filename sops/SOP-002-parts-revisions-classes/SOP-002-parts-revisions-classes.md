@@ -22,27 +22,31 @@ Everything that appears on a BOM: purchased parts, made parts (PCBs, printed or 
 parts, harnesses), assemblies, firmware and consumables. Also serial numbers of built units.
 
 ## 3. Part numbers
-
-| Type | Format | Kept in | Example |
-|---|---|---|---|
-| **OTS part** (off the shelf) | `CCC-NNNN` | OTS library (`minimal-qms-ots-library` repo) | `HWB-0001` M3x8 screws |
-| **Custom part** | `PPP-NNNN` | Product repo, `03_build_package/parts.csv` | `PRX-0004` printed lid |
-| **Custom assembly** | `PPP-A-NNNN` | Product repo, `03_build_package/parts.csv` | `PRX-A-0003` assembled PCB |
-
-- `CCC` is an OTS category code; `PPP` is the project code. Both are 3 capital letters,
-  registered in the OTS library, and never the same. `A` is a fixed letter that marks an
-  assembly.
+Every item on a BOM has a part number (PN). The rules, whatever the format:
+- A PN identifies one item: it never changes meaning and is never reused.
+- An assembly's PN shows that it is an assembly, and a custom item's PN shows that it is
+  custom rather than bought, so a BOM line says by itself whether it needs its own build
+  document (SOP-006) or a supplier.
+- Custom PNs are scoped to the project; bought (OTS) PNs are shared across projects.
 - An assembly has sub-parts or requires an assembly or modification instruction. A PCB
   ordered already assembled is an assembly.
-- Custom parts and assemblies share one number sequence per project.
-- Allocate numbers with the OTS library's `new_pn.py`. A part number never changes meaning
-  and is never reused.
+
+| Type | Kept in |
+|---|---|
+| **OTS part** (off the shelf) | OTS library (`minimal-qms-ots-library` repo), or the product's BOM if the team keeps no library |
+| **Custom part** | Product repo, in the BOM of the assembly that uses it |
+| **Custom assembly** | Product repo, as the number of its build document |
+
+The format is a team choice. The minimalQMS default (`CCC-NNNN`, `PPP-NNNN`, `PPP-A-NNNN`,
+allocated with the OTS library's `new_pn.py`) is in `docs/INTERFACES.md`, "Part numbers";
+the tools and agents use it. A team that uses another format records it there and adapts
+the tools.
 - OTS records hold where to buy: manufacturer, MPN, supplier, supplier part number, link,
   pack quantity, and the price of one piece with its date. Parts sold in packs are ordered
   in whole packs. For McMaster-Carr parts, manufacturer and MPN stay blank (McMaster hides
-  them). Custom records hold revision, lifecycle, make method and
-  source (CAD reference), plus the same purchasing columns when the part is bought from a
-  fabricator.
+  them). A custom part's revision is in the BOM that uses it, and its CAD source in the
+  build document's title block and make-files README; when a fabricator makes it, the BOM
+  line carries the same purchasing columns.
 
 *Basis: ISO §8.5.2. The format is a minimalQMS choice; OTS category codes are adapted from
 gitplm (see NOTICE).*
@@ -56,12 +60,12 @@ A, B, C …, omitting I, O, Q, S, X and Z.
 - OTS parts have no internal revision; the manufacturer part number defines them. A
   replacement MPN that is not a drop-in substitute receives a new PN.
 
-A revision change follows SOP-001: everything that cites the part (`parts.csv`, BOMs,
+A revision change follows SOP-001: everything that cites the part (BOMs, build documents,
 drawings) is updated in the same change.
 
 Each released file, output folder and git tag must identify the PN and revision it belongs
 to. The default names are:
-- files and folders: `<PN>_rev<X>_<short-name>`, e.g. `PRX-0004_revB_lid.step`;
+- files and folders: `<PN>_<short-name>_rev_<X>`, e.g. `PRX-0004_lid_rev_B.step`;
 - tags: `<PN>-rev<X>`, e.g. `PRX-0002-revB`.
 
 A team may use other names that meet the rule.
@@ -70,26 +74,39 @@ minimalQMS choice based on common drafting practice. The default names are a min
 choice.*
 
 ## 5. Lifecycle
-Each PN (OTS and custom) has one lifecycle state:
+Custom parts and assemblies take their state from git, through their build document:
 
-| State | Meaning |
+| State | Where it is |
 |---|---|
-| `draft` | In design. Not permitted on a released BOM. |
-| `released` | Approved for building or purchasing. |
-| `obsolete` | Not permitted in new builds. Retained for traceability of existing units. |
+| Draft | On a branch or in an open pull request; title blocks say "Draft". |
+| Released | Merged to `main` after approval and tagged `<PN>-rev<X>`, with a GitHub Release carrying the build document and its appendices; title blocks say "Released" with the date. |
+| Obsolete | Superseded by a later revision or no longer in any current BOM; earlier revisions stay in their tags and releases. |
 
+OTS parts keep a `lifecycle` column in the OTS library (`draft`, `released`, `obsolete`).
 State changes follow SOP-001.
-*Basis: ISO §8.5.2. The three states are a minimalQMS choice.*
+*Basis: ISO §8.5.2, §7.5.3. Using git as the record of state is a minimalQMS choice.*
 
 ## 6. Part classes
 
-| Class | Items | Traced to | Incoming inspection |
-|---|---|---|---|
-| **A** | Made parts and key components: PCBs, LEDs, driver ICs, printed or machined parts, harnesses | The specific purchase or print job, per unit | Yes, recorded |
-| **B** | Bulk hardware: screws, standoffs, heat-set inserts, wire, crimps | The bulk purchase | Visual check, not recorded |
-| **C** | Consumables: glue, flux, solder, zip ties | Not traced | None |
+The class says how a part may be bought. The BOM (appendix A01) shows it in a Purchasing
+column, so the purchaser knows which parts may come from anywhere:
 
-The class is set per PN. When in doubt, assign the higher class.
+| A01 Purchasing | Meaning |
+|---|---|
+| `Custom` | A custom part (PPP-NNNN), made to its design |
+| `Approved supplier, exact part` | Class A |
+| `Any supplier, exact part` | Class B or C, but the design depends on this exact part: a heat-set insert whose hole is drawn for it, a board the housing is built around. Marked per BOM line (`exact_part`) |
+| `Any supplier, any matching part` | Class B or C: any part that matches the BOM description |
+
+| Class | Items | Bought from |
+|---|---|---|
+| **A** | Parts where a wrong or fake part causes a real problem: safety (power supplies), measurement (sensors), certification (radio boards), and key components | An approved supplier (SOP-005) |
+| **B** | Low-risk parts: hardware (screws, inserts, standoffs), cables, memory cards, passive adapter boards | Any supplier; the exact part where the design depends on it |
+| **C** | Consumables: glue, flux, solder, zip ties | Any source |
+
+Custom parts are made in house or by a chosen maker; the critical ones are inspected on receipt
+(SOP-006 section 3). Traceability to purchases is optional (SOP-006 section 6). The class is
+set per PN; when in doubt, assign A.
 *Basis: ISO §8.5.2 and §8.4.2 allow traceability and control to be set by risk. The A/B/C
 scheme is a minimalQMS choice.*
 
@@ -124,10 +141,17 @@ assembly. The BOM of the top assembly at a given revision defines it.
 The variant, software and tag rules are a minimalQMS choice.*
 
 ## 9. Records
-- Product repo `03_build_package/parts.csv`: custom parts and assemblies.
-- Product repo `03_build_package/bom.csv`: master BOM, one block of lines per assembly (top level
-  and each sub-assembly), referring to OTS and custom PNs alike. Exported from the CAD tools
-  at release.
+- Product repo: one BOM per assembly, issued as appendix A01 of its build document
+  (`03_build_package/<PN>-A01_bom_rev_<X>.csv`, source `02_design/build_document/bom.csv`),
+  read from the CAD tools. Columns: ref (the callout used in the assembly instruction), PN,
+  rev (custom parts), description, category (`Custom (part)`, `Custom (assembly)` or `OTS`),
+  qty, unit in capitals (`EA`), and for OTS parts the manufacturer, manufacturer PN, supplier,
+  supplier PN, link, price, and the unit and line cost in CAD, so the purchaser can order from it
+  alone. Column names: `ref`, `internal_pn`, `rev`, `description`, `category`, `purchasing`,
+  `qty`, `unit`, `manufacturer`, `manufacturer_pn`, `supplier`, `supplier_pn`, `link`,
+  `unit_price`, `pack_qty`, `currency`, `unit_cost_cad`, `line_cost_cad`, `price_date`, `notes`. No
+  blank cells: `-` where a field does not apply. Ordering data is copied into each
+  product; the OTS library is the source when a team keeps one.
 - OTS library: `parts/CCC.csv` (one file per prefix), `categories.csv` and `projects.csv`.
 
 These records are controlled under SOP-001. CI checks that every BOM line refers to an
@@ -139,5 +163,5 @@ and change only through a revision of this SOP.
 
 | ID | Title | File | Used in product repos as |
 |---|---|---|---|
-| SOP-002-A01 | Custom parts list | [SOP-002-A01-custom-parts.csv](SOP-002-A01-custom-parts.csv) | `03_build_package/parts.csv` |
-| SOP-002-A02 | Master BOM | [SOP-002-A02-bom.csv](SOP-002-A02-bom.csv) | `03_build_package/bom.csv` |
+| SOP-002-A01 | Custom parts list | [SOP-002-A01-custom-parts.csv](SOP-002-A01-custom-parts.csv) | Optional: only when custom parts are shared across several assemblies |
+| SOP-002-A02 | Assembly BOM | [SOP-002-A02-bom.csv](SOP-002-A02-bom.csv) | `02_design/build_document/bom.csv` (issued as appendix A01) |

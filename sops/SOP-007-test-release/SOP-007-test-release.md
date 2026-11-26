@@ -23,7 +23,7 @@ Design validation is planned through requirements and gates (SOP-004).
 
 ## 3. Test procedures
 Each requirement verified by test (SOP-004) refers to a test procedure
-`03_build_package/test_procedures/TP-nnn.md`. A test procedure states the setup, the equipment,
+`02_design/test_procedures/TP-nnn.md`, issued in appendix A03 of the build document. A test procedure states the setup, the equipment,
 the steps, and for each measurement the limits and the requirement checked. Test
 procedures are controlled documents (SOP-001) and are approved at G2 (design freeze).
 
@@ -76,7 +76,7 @@ and change only through a revision of this SOP.
 
 | ID | Title | File | Used in product repos as |
 |---|---|---|---|
-| SOP-007-A01 | Test procedure | [SOP-007-A01-test-procedure.md](SOP-007-A01-test-procedure.md) | `03_build_package/test_procedures/TP-nnn.md` |
+| SOP-007-A01 | Test procedure | [SOP-007-A01-test-procedure.md](SOP-007-A01-test-procedure.md) | `02_design/test_procedures/TP-nnn.md` (issued in appendix A03) |
 | SOP-007-A02 | Test results | [SOP-007-A02-test-results.csv](SOP-007-A02-test-results.csv) | `builds/B00n/test_results.csv` |
 | SOP-007-A03 | Equipment and calibration list | [SOP-007-A03-equipment.csv](SOP-007-A03-equipment.csv) | `equipment/equipment.csv` |
 | SOP-007-A04 | Release record | [SOP-007-A04-release.yaml](SOP-007-A04-release.yaml) | `builds/B00n/release.yaml` |
