@@ -106,9 +106,10 @@ approval freezes those versions, and the CAD versions are marked after approval.
 the hardware: what must be bought and made. Software and firmware that only run on the
 finished unit stay a versioned draft in `02_design/software/` through G2 and are released
 (appendix A06) once they pass their tests, at G3 at the latest; a change before then is a
-version bump, not an assembly revision. A Fusion or
-other native CAD file is not exported; its version is recorded in the A02 README and the
-review minutes. Design sources remain in `02_design/`. Large binary files are stored with Git LFS. The
+version bump, not an assembly revision. A02 also carries a backup of the CAD in its native
+format (e.g. Fusion `.f3d` for each custom part) and the top assembly as STEP, so the design
+survives losing access to the CAD tool's cloud; the CAD versions are recorded in the A02
+README and the review minutes. Design sources remain in `02_design/`. Large binary files are stored with Git LFS. The
 package is complete when the product can be bought, made, built and tested from it alone.
 It is approved at G2.
 *Basis: ISO §8.3.5, §8.5.1. The folder and its contents are a minimalQMS choice.*
