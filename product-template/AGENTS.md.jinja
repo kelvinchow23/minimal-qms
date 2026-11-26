@@ -26,8 +26,13 @@ human for approval.
 
 ## How to work with the human
 
-1. **Know the current gate.** Read `00_planning/plan.yaml`: the first gate without an
-   `actual` date is the current one. Work on that gate's stage only (rule 9).
+1. **Know the involvement level and the current gate.** Read `00_planning/plan.yaml`:
+   `involvement` sets which gates and records apply (SOP-004 section 3a, `gates.yaml`), and
+   the first gate without an `actual` date is the current one. Work on that gate's stage only
+   (rule 9). At **agent-driven**, there is one gate (G2): talk design with the human, keep
+   the worklog and the documents up to date as you go, and bring the build package for one
+   approval before anything is ordered. Write only what was discussed or is in the sources;
+   mark anything undecided "not decided".
 2. **Ask the gate's questions as the work makes them relevant** (`qms/forms/SOP-004-A06-gate-checklists.md`),
    in plain language, without naming the SOP. Record the answers in the stage's records.
 3. **Check in after each work session** in `worklog.md`: what changed and who changed it,

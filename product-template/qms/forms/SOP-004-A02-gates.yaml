@@ -1,7 +1,15 @@
 # SOP-004-A02 Gate requirements (appendix to SOP-004; revised with it)
-# Records each gate needs (SOP-004 section 3). CI blocks a gate whose records are missing.
-G0: {passed_by: approval, requires: [00_planning/plan.yaml, roles.yaml]}
-G1: {passed_by: formal_review, requires: [01_requirements/requirements.yaml, 01_requirements/risks.csv]}
-G2: {passed_by: formal_review, requires: [design review minutes, "03_build_package/<PN>_assembly_instructions_rev_<X>.pdf and appendices A01 to A05 (as applicable)"]}
-G3: {passed_by: formal_review, requires: ["builds/B00n/build.yaml, inspection.csv, trace.csv", "builds/B00n/test_results.csv covering every requirement verified by test"]}
-G4: {passed_by: formal_review, requires: ["builds/B00n/release.yaml for every unit", "NC records closed or dispositioned", lessons learned in worklog.md or a close-out note, 00_planning/scorecard.csv]}
+# Records each gate needs, per involvement level (SOP-004 sections 3 and 3a). The product's
+# level is `involvement` in plan.yaml; only that level's gates apply.
+agent-driven:
+  G2: {passed_by: approval, requires: [worklog.md (design history), "01_requirements/requirements.yaml (essential functions)", "03_build_package/<PN>_assembly_instructions_rev_<X>.pdf and its appendices", purchasing/suppliers.csv]}
+balanced:
+  G1: {passed_by: formal_review, requires: [00_planning/plan.yaml, roles.yaml, 01_requirements/requirements.yaml, 01_requirements/risks.csv]}
+  G2: {passed_by: formal_review, requires: [design review record, "03_build_package/<PN>_assembly_instructions_rev_<X>.pdf and its appendices"]}
+  G3: {passed_by: formal_review, requires: ["builds/B00n/build.yaml and travellers", "builds/B00n/test_results.csv covering every requirement verified by test", "builds/B00n/release.yaml for every unit", lessons learned in worklog.md]}
+human-driven:
+  G0: {passed_by: approval, requires: [00_planning/plan.yaml, roles.yaml]}
+  G1: {passed_by: formal_review, requires: [01_requirements/requirements.yaml, 01_requirements/risks.csv]}
+  G2: {passed_by: formal_review, requires: [design review minutes, "03_build_package/<PN>_assembly_instructions_rev_<X>.pdf and its appendices"]}
+  G3: {passed_by: formal_review, requires: ["builds/B00n/build.yaml and travellers", "builds/B00n/test_results.csv covering every requirement verified by test"]}
+  G4: {passed_by: formal_review, requires: ["builds/B00n/release.yaml for every unit", "NC records closed or dispositioned", lessons learned in worklog.md or a close-out note, 00_planning/scorecard.csv]}

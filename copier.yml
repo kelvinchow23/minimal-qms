@@ -37,6 +37,15 @@ approver_id:
   help: Short id for records (e.g. initials)
   default: "{{ approver_name.split() | map('first') | join('') | lower }}"
 
+involvement:
+  type: str
+  help: "How much you sign off (SOP-004 section 3a): agent-driven = one approval of the build package; balanced = three gates; human-driven = all five gates"
+  choices:
+    - agent-driven
+    - balanced
+    - human-driven
+  default: agent-driven
+
 mcad_tool:
   type: str
   help: Mechanical CAD tool
